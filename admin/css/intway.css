@@ -1,0 +1,51 @@
+.mt-1 {
+    margin-top: 10px !important;
+}
+
+
+.error {
+  color: #ef5350;
+  font-size: 12px;
+  font-weight: 500; }
+
+.parsley-error {
+  border-color: #ef5350 !important; }
+
+.parsley-errors-list {
+  display: none;
+  margin: 0;
+  padding: 0; }
+
+.parsley-errors-list.filled {
+  display: block; }
+
+.parsley-errors-list > li {
+  font-size: 12px;
+  list-style: none;
+  color: #ef5350; }
+  
+.datepicker {
+background-color: #fff ;
+color: #333 ;
+}
+.btn-intway {
+height: 31px;
+margin: 0px 0 0 5px;
+padding: 0 22px;
+font: 300 15px/29px 'Open Sans',Helvetica,Arial,sans-serif;
+cursor: pointer;
+}
+.dropdown-menu {
+left: -30px !important;
+min-width: auto !important;
+}
+.bgfacturacion {
+
+	background-repeat: no-repeat !important;
+    background-attachment: fixed !important;
+    background-position: center !important;
+    background-image: linear-gradient(to bottom, rgba(255,255,255,0.4) 0%,rgba(255,255,255,0.4) 100%), url("/img/agenda-analysis-business-990818.jpg") !important;
+}
+.border-err {
+	border: 2px solid red !important;
+}

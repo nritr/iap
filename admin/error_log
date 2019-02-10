@@ -1,0 +1,12 @@
+[03-Feb-2019 23:25:11 America/Argentina/Buenos_Aires] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /home/followdevelopcom/iap.follow-develop.com.ar/admin/php/dao/UsuarioDao.php:80
+Stack trace:
+#0 /home/followdevelopcom/iap.follow-develop.com.ar/admin/php/services/UsuarioService.php(73): UsuarioDao->load(Object(UsuarioFilter))
+#1 /home/followdevelopcom/iap.follow-develop.com.ar/admin/php/services/UsuarioService.php(19): UsuarioService->getUserById('1')
+#2 /home/followdevelopcom/iap.follow-develop.com.ar/admin/php/services/UsuarioService.php(28): UsuarioService->isLogued()
+#3 /home/followdevelopcom/iap.follow-develop.com.ar/admin/index.php(21): UsuarioService->notLoguedRedirect()
+#4 {main}
+  thrown in /home/followdevelopcom/iap.follow-develop.com.ar/admin/php/dao/UsuarioDao.php on line 80
+[06-Feb-2019 11:26:05 America/Argentina/Buenos_Aires] PHP Notice:  Trying to get property of non-object in /home/followdevelopcom/iap.follow-develop.com.ar/admin/php/utils/SkinCommons.php on line 71
+[06-Feb-2019 11:26:05 America/Argentina/Buenos_Aires] PHP Notice:  Trying to get property of non-object in /home/followdevelopcom/iap.follow-develop.com.ar/admin/php/utils/SkinCommons.php on line 28
+[06-Feb-2019 11:26:05 America/Argentina/Buenos_Aires] PHP Notice:  Trying to get property of non-object in /home/followdevelopcom/iap.follow-develop.com.ar/admin/php/utils/SkinCommons.php on line 29
+[06-Feb-2019 11:26:05 America/Argentina/Buenos_Aires] PHP Notice:  Trying to get property of non-object in /home/followdevelopcom/iap.follow-develop.com.ar/admin/php/utils/SkinCommons.php on line 29

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en-us">
+	$TXT_INCLUDE_HEAD$
+	
+	<body class="$TXT_CLASS_LF$">
+
+		$TXT_INCLUDE_BODY_HEAD$
+
+		$TXT_INCLUDE_NAVIGATION_PANEL$
+
+		<!-- MAIN PANEL -->
+		<div id="main" role="main">
+
+			
+
+			<!-- MAIN CONTENT -->
+			<div id="content">
+
+				<div class="row">
+					<div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
+						<h1 class="page-title txt-color-blueDark"><i class="fa fa-group fa-fw "></i> 
+							Usuarios
+							<span>>
+							Lista
+							</span>
+						</h1>
+					</div>
+				</div>
+				<!-- row -->
+
+				<!-- widget grid -->
+				<section id="widget-grid" class="">
+
+					<!-- row -->
+					<div class="row">
+					
+						<article class="col-sm-12">
+							<a href="usuario.php" style="display: $TXT_DISPLAY_ALTA$" class="btn btn-primary ml-4"><span class="fa fa-user-plus"></span> Alta de Usuario</a>
+						</article>
+						<article class="col-sm-12">
+							<div class="table-responsive mt-1">
+										
+									<table class="table table-bordered .table-hover .smart-form" id="datatable-buttons">
+                                        <thead>
+                                        <tr>
+											<th>Usuario</th>
+											<th>Email</th>
+											<th>Rol</th>
+											<th>Región</th>
+											<th width="30%">Acción</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+										$INI_LOOP_USUARIOS$
+                                        <tr id="tr_elim_usr_$TXT_ID_USUARIO$">
+											<td id="nombre_usuario_$TXT_ID_USUARIO$">$TXT_USUARIO$</td>
+											<td>$TXT_EMAIL$</td>
+											<td>$TXT_ROL$</td>
+											<td>$TXT_SUCURSAL$</td>
+											<td>
+												<form action="usuario.php" method="post" id="frm_usr_$TXT_ID_USUARIO$">
+													<input type="hidden" name="id_usuario" value="$TXT_ID_USUARIO$"/>
+													<button type="button"  style="display: $TXT_DISPLAY_MODIF$" onclick="$('#frm_usr_$TXT_ID_USUARIO$').submit()" class="btn btn-primary waves-effect">
+														<span class="fa fa-edit"></span>
+														Modificar
+													</button>
+													<button type="button" eliminar="$TXT_ID_USUARIO$" style="display: $TXT_DISPLAY_ELIM$" class="btn btn-secondary waves-effect" data-toggle="modal" data-target="#full-width-modal">
+														<span class="fa fa-trash"></span>
+														Eliminar
+													</button>
+													<button type="button" cambiarpass="$TXT_ID_USUARIO$" class="btn btn-secondary waves-effect" data-toggle="modal" data-target="#full-width-modal">
+														<span class="fa fa-lock"></span>
+														Cambiar Clave
+													</button>
+												</form>
+											</td>
+                                        </tr>
+										$END_LOOP_USUARIOS$
+
+                                        </tbody>
+                                    </table>
+                                </div>
+						</article>
+					</div>
+
+					<!-- end row -->
+
+				</section>
+				<!-- end widget grid -->
+
+			<!-- Modal -->
+				<div class="modal fade" id="modal-eliminar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+									&times;
+								</button>
+								<h4 class="modal-title" id="myModalLabel">Eliminar Usuario</h4>
+							</div>
+							<div class="modal-body">
+				
+								<div class="row">
+								<span>Desea Eliminar El Usuario?</span>
+								</div>
+				
+							</div>
+							<div class="modal-footer">
+								<form method="post" >
+								<input type="hidden" name="id_usuario" id="id_usuario" />
+								<button type="button" class="btn btn-default" data-dismiss="modal">
+									<i class="fa fa-close"></i>
+									Cancelar
+								</button>
+								<button type="button" onclick="eliminar()" class="btn btn-primary">
+									<i class="fa fa-trash"></i>
+									Eliminar
+								</button>
+								</form>
+							</div>
+						</div><!-- /.modal-content -->
+					</div><!-- /.modal-dialog -->
+				</div><!-- /.modal -->
+				
+				<!-- Modal -->
+				<div class="modal fade" id="change-password" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+									&times;
+								</button>
+								<h4 class="modal-title" id="myModalLabel">Cambio de Password</h4>
+							</div>
+							<div class="modal-body">
+								<form class="form form-inline " role="form" id="frm_change_pass">
+									<input type="hidden" name=id_usuario id="id_usuario_pass"/>
+									<input type="hidden" name="tipo" value="change_pass"/>
+									<div class="well well-sm well-primary">
+										<div class="row">
+										
+											<div class="col-md-6">
+												<div class="form-group">
+													<label for="password"> Clave</label>
+													<input type="password" class="form-control" data-parsley-minlength="6" id="password" name="password" required>
+												</div>
+											</div>
+											<div class="col-md-6">
+												<div class="form-group">
+													<label for="repassword"> Re Clave</label>
+													<input type="password" class="form-control" id="repassword" data-parsley-equalto="#password" id="repassword" name="repassword" required>
+												</div>
+											</div>
+										</div>
+									</div>
+								</form>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default" data-dismiss="modal">
+									Cancelar
+								</button>
+								<button type="button" class="btn btn-primary" onclick="cambiarClave()">
+									Cambiar
+								</button>
+							</div>
+						</div><!-- /.modal-content -->
+					</div><!-- /.modal-dialog -->
+				</div><!-- /.modal -->
+				
+				
+			</div>
+			<!-- END MAIN CONTENT -->
+
+		</div>
+		<!-- END MAIN PANEL -->
+
+		$TXT_INCLUDE_FOOTER$
+
+		
+
+
+
+		<!-- MAIN APP JS FILE -->
+		<script src="/admin/js/app.js"></script>
+		<script src="/admin/modulos/usuarios/js/app.usuarios.js?v=1.0"></script>
+		
+
+
+	</body>
+
+</html>

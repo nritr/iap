@@ -1,0 +1,7 @@
+[31-Jan-2019 10:32:40 America/Argentina/Buenos_Aires] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'followdevelopcom_iap_site.REGION' doesn't exist in /home/followdevelopcom/iap.follow-develop.com.ar/admin/php/dao/ComboDao.php:73
+Stack trace:
+#0 /home/followdevelopcom/iap.follow-develop.com.ar/admin/php/dao/ComboDao.php(73): PDOStatement->execute()
+#1 /home/followdevelopcom/iap.follow-develop.com.ar/admin/php/services/ComboService.php(23): ComboDao->loadRegiones(Object(RegionFilter))
+#2 /home/followdevelopcom/iap.follow-develop.com.ar/admin/modulos/prospectos/php/prospect_main.php(88): ComboService->loadRegiones()
+#3 {main}
+  thrown in /home/followdevelopcom/iap.follow-develop.com.ar/admin/php/dao/ComboDao.php on line 73

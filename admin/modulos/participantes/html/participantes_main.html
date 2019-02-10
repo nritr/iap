@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en-us">
+	$TXT_INCLUDE_HEAD$
+	
+	<body class="$TXT_CLASS_LF$">
+
+		$TXT_INCLUDE_BODY_HEAD$
+
+		$TXT_INCLUDE_NAVIGATION_PANEL$
+
+		<!-- MAIN PANEL -->
+		<div id="main" role="main">
+
+			
+
+			<!-- MAIN CONTENT -->
+			<div id="content">
+
+				<div class="row">
+					<div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
+						<h1 class="page-title txt-color-blueDark"><i class="fa fa-group fa-fw "></i> 
+							Participants
+							<span>>
+							List
+							</span>
+						</h1>
+					</div>
+				</div>
+				<!-- row -->
+
+				<!-- widget grid -->
+				<section id="widget-grid" class="">
+
+					<!-- row -->
+					<div class="row">
+						<article class="col-sm-12">
+						
+							<!-- Widget ID (each widget will need unique ID)-->
+							<div class="jarviswidget" id="wid-id-8" data-widget-editbutton="false" data-widget-custombutton="false" data-widget-colorbutton="false"	
+									data-widget-editbutton="false"
+									data-widget-togglebutton="false"
+									data-widget-deletebutton="false"
+									data-widget-fullscreenbutton="false"
+									data-widget-custombutton="false"
+									data-widget-collapsed="false" 
+									data-widget-sortable="false">
+								<header>
+									<span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+									<h2>Buscar Cliente</h2>				
+									
+								</header>
+				
+								<!-- widget div-->
+								<div>
+									<!-- widget content -->
+									<div class="widget-body no-padding">
+										<form action="participantes_main.php" id="frm_filter_clientes" method="post" class="smart-form">
+										<input type="hidden" name="value" id="value" value="$TXT_VALUE$"/>
+										<input type="hidden" name="filterload" id="filterload" value='$TXT_FILTER$'/>
+										<fieldset>					
+												<div class="row">
+													<section class="col col-md-4">
+														<label class="label">FILTER</label>
+														<label class="input">
+															<select  class="form-control" name="filter" id="filter" attach-change attach-type="filter">
+																<option value="">SELECT...
+																<option value="AND i.CODE=:value:">CODE
+																<option value="AND d.PASSPORT_NUMBER=:value:">PASSPORT NUMBER
+																<option value='AND d.COUNTRY=":value:"'>COUNTRY
+																<option value='AND (d.FIRST_NAME LIKE "%:value:%" OR d.MIDDLE_NAME LIKE "%:value:%" OR LAST_NAME LIKE "%:value:%")'>NAME/LAST NAME
+																<option value='AND d.BADGE_NAME like "%:value:%"'>PREFERRED NAME ON NAME BADGE
+																<option value='AND d.EMAIL like "%:value:%"'>EMAIL
+																<option value='AND d.JOB_TITLE=":value:"'>JOB TITLE
+																
+															</select>
+														</label>
+													</section>
+													<section class="col col-md-6" panel="AND d.PASSPORT_NUMBER=:value:" style="display:none">
+														<label class="label">PASSPORT NUMBER</label>
+														<label class="input">
+															<input type="number" value="" input-filter class="form-control" name="PASSPORT_NUMBER" id="PASSPORT_NUMBER" placeholder="PASSPORT NUMBER" />
+														</label>
+													</section>  
+													<section class="col col-md-6" panel="AND i.CODE=:value:" style="display:none">
+														<label class="label">CODE</label>
+														<label class="input">
+															<input type="number" value="" input-filter class="form-control" name="code2" id="code2" placeholder="CODE" />
+														</label>
+													</section>
+													<section class="col col-md-6" panel='AND d.COUNTRY=":value:"' style="display:none" >
+														<label class="label">COUNTRY</label>
+														<label class="input">
+															<select input-filter class="form-control" name="country" id="country" >
+															$TXT_COUNTRIES$
+															</select>
+														</label>
+													</section>
+													<section class="col col-md-6" panel='AND (d.FIRST_NAME LIKE "%:value:%" OR d.MIDDLE_NAME LIKE "%:value:%" OR LAST_NAME LIKE "%:value:%")' style="display:none" >
+														<label class="label">NAME/LAST NAME</label>
+														<label class="input">
+															<input type="text" input-filter class="form-control" name="name" id="name" placeholder="NAME/LAST NAME" />
+														</label>
+													</section>  
+													<section class="col col-md-6" panel='AND d.BADGE_NAME like "%:value:%"' style="display:none" >
+														<label class="label">PREFERRED NAME ON NAME BADGE </label>
+														<label class="input">
+															<input type="text" input-filter class="form-control" placeholder="PREFERRED NAME ON NAME BADGE" />
+														</label>
+													</section> 
+													<section class="col col-md-6" panel='AND d.EMAIL like "%:value:%"' style="display:none" >
+														<label class="label">EMAIL</label>
+														<label class="input">
+															<input type="text" input-filter class="form-control" placeholder="EMAIL" />
+														</label>
+													</section> 
+													<section class="col col-md-6" panel='AND d.JOB_TITLE=":value:"' style="display:none" >
+														<label class="label">JOB TITLE</label>
+														<label class="input">
+															<select input-filter class="form-control"  >
+															$TXT_JOB_TITLE$
+															</select>
+														</label>
+													</section>
+												</div>
+											</fieldset>
+											<footer>
+												
+												<button type="button"  class="btn btn-primary" attach-click attach-type="buscar">
+												<i class="fa fa-search"></i>
+												Buscar</button>
+												<button type="button" attach-click attach-type="cleanFormSearch" class="btn btn-default"><i class="fa fa-eraser"></i> Limpiar</button>
+											</footer>
+							
+
+										</form> <!-- FILTRO ESTDO -->
+									</div>
+									<!-- end widget content -->
+								</div>
+								<!-- end widget div -->
+							</div>
+							<!-- end widget -->
+							
+							
+						
+						</article>
+						<article class="col-sm-12">
+							<div class="table-responsive mt-1">
+										
+									<table class="table table-bordered .table-hover .smart-form" id="datatable-buttons">
+                                        <thead>
+                                        <tr>
+											<th>CODE</th>
+											<th>FULL NAME</th>
+											<th>COUNTRY</th>
+											<th>PASSPORT</th>
+											<th>EMAIL</th>
+											<th>STATUS</th>
+											<th>ARRIVED</th>
+											<th>REGISTER DATE</th>
+											<th width="30%"></th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+										<!-- $INI_LOOP_PARTICIPANTS$  -->
+                                        <tr>
+											<td>$TXT_CODE$</td>
+											<td>$TXT_FULL_NAME$</td>
+											<td>$TXT_COUNTRY$</td>
+											<td>$TXT_PASSPORT$</td>
+											<td>$TXT_EMAIL$</td>
+											<td>$TXT_STATUS$</td>
+											<td>$TXT_ARRIVED$</td>
+											<td>$TXT_REGISTER_DATE$</td>
+											<td>
+
+													<button type="button"  class="btn btn-primary waves-effect" attach-click="$TXT_ID_DATOS$" attach-type="ver">
+														<span class="fa fa-eye"></span>
+													</button>
+													<button type="button"  class="btn btn-danger waves-effect">
+														<span class="fa fa-trash"></span>
+													</button>
+													<button type="button" class="btn btn-secondary waves-effect">
+														<span class="fa fa-credit-card"></span>
+													</button>
+													<button type="button" class="btn btn-secondary waves-effect">
+														<span class="fa fa-plane"></span>
+													</button>
+													
+											</td>
+                                        </tr>
+										<!-- $END_LOOP_PARTICIPANTS$ -->
+
+                                        </tbody>
+                                    </table>
+                                </div>
+						</article>
+					</div>
+					<form action="participantes_edit.php" id="frm_edit" method="post" class="smart-form">
+						<input type="hidden" name="id_datos" id="id_datos" value=""/>
+					</form>
+					<!-- end row -->
+
+				</section>
+				<!-- end widget grid -->
+
+			<!-- Modal -->
+				<div class="modal fade" id="modal-eliminar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+									&times;
+								</button>
+								<h4 class="modal-title" id="myModalLabel">Eliminar Usuario</h4>
+							</div>
+							<div class="modal-body">
+				
+								<div class="row">
+								<span>Desea Eliminar El Usuario?</span>
+								</div>
+				
+							</div>
+							<div class="modal-footer">
+								<form method="post" >
+								<input type="hidden" name="id_usuario" id="id_usuario" />
+								<button type="button" class="btn btn-default" data-dismiss="modal">
+									<i class="fa fa-close"></i>
+									Cancelar
+								</button>
+								<button type="button" onclick="eliminar()" class="btn btn-primary">
+									<i class="fa fa-trash"></i>
+									Eliminar
+								</button>
+								</form>
+							</div>
+						</div><!-- /.modal-content -->
+					</div><!-- /.modal-dialog -->
+				</div><!-- /.modal -->
+				
+				<!-- Modal -->
+				<div class="modal fade" id="change-password" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+									&times;
+								</button>
+								<h4 class="modal-title" id="myModalLabel">Cambio de Password</h4>
+							</div>
+							<div class="modal-body">
+								<form class="form form-inline " role="form" id="frm_change_pass">
+									<input type="hidden" name=id_usuario id="id_usuario_pass"/>
+									<input type="hidden" name="tipo" value="change_pass"/>
+									<div class="well well-sm well-primary">
+										<div class="row">
+										
+											<div class="col-md-6">
+												<div class="form-group">
+													<label for="password"> Clave</label>
+													<input type="password" class="form-control" data-parsley-minlength="6" id="password" name="password" required>
+												</div>
+											</div>
+											<div class="col-md-6">
+												<div class="form-group">
+													<label for="repassword"> Re Clave</label>
+													<input type="password" class="form-control" id="repassword" data-parsley-equalto="#password" id="repassword" name="repassword" required>
+												</div>
+											</div>
+										</div>
+									</div>
+								</form>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default" data-dismiss="modal">
+									Cancelar
+								</button>
+								<button type="button" class="btn btn-primary" onclick="cambiarClave()">
+									Cambiar
+								</button>
+							</div>
+						</div><!-- /.modal-content -->
+					</div><!-- /.modal-dialog -->
+				</div><!-- /.modal -->
+				
+				
+			</div>
+			<!-- END MAIN CONTENT -->
+
+		</div>
+		<!-- END MAIN PANEL -->
+
+		$TXT_INCLUDE_FOOTER$
+
+		
+
+
+
+		<!-- MAIN APP JS FILE -->
+		<script src="/admin/js/app.js"></script>
+		<script src="/admin/modulos/participantes/js/app.participantes_main.js?v=1.0"></script>
+		
+
+
+	</body>
+
+</html>

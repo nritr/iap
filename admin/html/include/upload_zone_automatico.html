@@ -1,0 +1,52 @@
+<!--  IMAGENES -->
+<div class="form-group" id="upload-zone-panel">
+	<label class="col-sm-5 col-form-label" for="textarea">Subir Documentos</label>
+	<div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
+		<form action="$TXT_UPLOAD_PHP$" class="dropzone" id="dropzone"><!-- /ajax/upload.php -->
+			<input type="hidden" name="tipo" value="uploadautomatico"/>
+			<input type="hidden" name="id_usuario" id="id_usuario" />
+			<div class="fallback">
+				<input name="file" type="file" />
+			</div>
+		</form>
+		<p  class="form-text text-muted">
+
+		</p>
+	</div>
+</div>
+<div class="col-xs-12 col-md-12 col-sm-12 col-lg-12">
+<form class="smart-form">
+	<div id="upload_errors" style="display:none;margin-bottom:15px">
+		
+		<table class="table table-bordered .table-hover .smart-form" id="datatable-buttons">
+			<thead>
+            <tr>
+            	<th>ARCHIVO</th>
+                <th>ERROR</th>
+           </tr>
+           </thead>
+           <tbody id="body-table-errors">
+
+			</tbody>
+		</table>
+	</div>
+	
+	<div id="upload_sorted_group" style="$TXT_DISPLAY_IMG$">
+		
+		<table class="table table-bordered .table-hover .smart-form" id="datatable-buttons">
+			<thead>
+            <tr>
+            	<th>EMPLEADO</th>
+                <th>DOCUMENTO</th>
+				<th>TIPO</th>
+				<th>FECHA</th>
+				<th></th>
+           </tr>
+           </thead>
+           <tbody id="body-table-docs">
+
+			</tbody>
+		</table>
+	</div>
+</form>
+</div>

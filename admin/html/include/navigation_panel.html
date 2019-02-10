@@ -1,0 +1,68 @@
+<!-- Left panel : Navigation area -->
+<!-- Note: This width of the aside area can be adjusted through LESS variables -->
+<aside id="left-panel">
+
+	<!-- User info -->
+	<div class="login-info">
+		<span> <!-- User image size is adjusted inside CSS, it should stay as it --> 
+			
+			<a href="javascript:void(0);" id="show-shortcut" data-action="toggleShortcut">
+				<span>
+					$TXT_NOMBRE_USUARIO$
+				</span>
+				<i class="fa fa-angle-down"></i>
+			</a> 
+			
+		</span>
+	</div>
+	<!-- end user info -->
+
+	<!-- NAVIGATION : This navigation is also responsive-->
+	<nav>
+		<!-- 
+		NOTE: Notice the gaps after each icon usage <i></i>..
+		Please note that these links work a bit different than
+		traditional href="" links. See documentation for details.
+		-->
+		
+		<ul >
+			
+			<li class="" show-only-admin>
+				<a href="#" title="Administración"><i class="fa fa-lg fa-fw fa-gears"></i> <span class="menu-item-parent">Administration</span></a>
+				<ul >
+					<!-- li class="$TXT_GENERICO_ACTIVE$">
+						<a href="/admin/modulos/generico/php/main.php" title="Datos Paramétricos"><i class="fa fa-lg fa-fw  fa-check-square-o"></i> <span class="menu-item-parent">Datos Paramétricos</span></a>
+					</li> -->
+					<li class="$TXT_USUARIOS_ACTIVE$">
+						<a href="/admin/modulos/usuarios/php/usuarios.php" title="Usuarios"><i class="fa fa-lg fa-fw  fa-group"></i> <span class="menu-item-parent">Users</span></a>
+					</li>
+					
+				</ul> 
+			</li>
+			
+			<li class="" hidden-on-init show-admin show-ventas >
+				<a href="#" title="Ventas"><i class="fa fa-lg fa-fw fa-group"></i> <span class="menu-item-parent">Registrations</span></a>
+				<ul >
+					<li class="$TXT_PARTICIPANTS_MAIN_ACTIVE$">
+						<a href="/admin/modulos/participantes/php/participantes_main.php" title="Dashboard"><i class="fa fa-lg fa-fw fa-group"></i> <span class="menu-item-parent">Participants</span></a>
+					</li>
+
+				</ul> 
+			</li>
+
+		</ul>
+		
+		
+	</nav>
+	
+
+	<span class="minifyme" data-action="minifyMenu"> 
+		<i class="fa fa-arrow-circle-left hit"></i> 
+	</span>
+
+</aside>
+<div id="notificacion" style="display:none" type="$TXT_NOTIF_TYPE$" place="$TXT_NOTIF_PLACE$" text="$TXT_NOTIF_TEXT$"></div>
+<script>
+var rolLogued 			= $TXT_ID_ROL$;
+</script>
+<!-- END NAVIGATION -->

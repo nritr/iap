@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en-us">
+	$TXT_INCLUDE_HEAD$
+	
+	<body class="$TXT_CLASS_LF$">
+
+		$TXT_INCLUDE_BODY_HEAD$
+
+		$TXT_INCLUDE_NAVIGATION_PANEL$
+
+		<!-- MAIN PANEL -->
+		<div id="main" role="main">
+
+			
+			
+			<!-- END RIBBON -->
+
+			<!-- MAIN CONTENT -->
+			<div id="content">
+				<div class="row">
+					<div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
+						<h1 class="page-title txt-color-blueDark"><i class="fa fa-rotate-right fa-fw "></i> 
+							Prospectos
+							<span>>
+							Renovaciones
+							</span>
+						</h1>
+					</div>
+				</div>
+				<!-- row -->
+				
+				<!-- widget grid -->
+				<section id="widget-grid" class="">
+
+					<!-- row -->
+					<div class="row">
+						<article class="col-sm-12">
+						
+							<!-- Widget ID (each widget will need unique ID)-->
+							<div class="jarviswidget" id="wid-id-8" data-widget-editbutton="false" data-widget-custombutton="false" data-widget-colorbutton="false"	
+									data-widget-editbutton="false"
+									data-widget-togglebutton="false"
+									data-widget-deletebutton="false"
+									data-widget-fullscreenbutton="false"
+									data-widget-custombutton="false"
+									data-widget-collapsed="false" 
+									data-widget-sortable="false">
+								<header>
+									<span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+									<h2>Filtrar Prospecto</h2>				
+									
+								</header>
+				
+								<!-- widget div-->
+								<div>
+									<!-- widget content -->
+									<div class="widget-body no-padding">
+										<form action="prospect_main.php" id="frm_filter_clientes" method="post" class="smart-form">
+										<input type="hidden" name="filtro" value="1"/>
+										<fieldset>					
+												<div class="row">
+													<section class="col col-md-2">
+														<label class="label">Origen</label>
+														<button type="button" class="btn btn-primary" style="margin-top: 5px;padding:2px" attach-click="todos" attach-type="filter">
+														Todos</button>
+														<button type="button" class="btn btn-default" style="margin-top: 5px;padding:2px" attach-click="oportunidad" attach-type="filter">
+														<i class="fa fa-heart" style="color:red"></i> Oportunidad</button>
+														<button type="button" class="btn btn-default" style="margin-top: 5px;padding:2px" attach-click="consulta" attach-type="filter">
+														<i class="fa fa-question-circle" ></i> Consulta</button>
+													</section>
+													<section class="col col-md-1">
+														<label class="label">Región</label>
+														<select class="form-control" filtros id="id_region" name="id_region" >
+															<option value="">TODOS</option>
+															$INI_LOOP_REGIONES$
+															<option $TXT_REGION_SELECTED$ value="$TXT_ID_REGION$">$TXT_REGION_LOOP$</option>
+															$END_LOOP_REGIONES$
+														</select>
+													</section>
+													<section class="col col-md-2">
+														<label class="label">Estado</label>
+														<select class="form-control" filtros id="id_estado" name="id_estado" >
+															<option value="">TODOS</option>
+															<option value="1">fata tabla estados???</option>
+															<option value="2">fata tabla estados???</option>
+														</select>
+													</section>
+								
+													<section class="col col-md-2">
+														<label class="label">SubEstado</label>
+														<select class="form-control" filtros id="id_sub_estado" name="id_sub_estado" >
+															<option value="">TODOS</option>
+															<option value="1">fata tabla estados???</option>
+															<option value="2">fata tabla estados???</option>
+														</select>
+													</section>
+													<section class="col col-2">
+														<label class="label">&nbsp;</label>
+														<button type="button" class="btn btn-default" style="margin-top: 5px;padding:2px" attach-click="consulta" attach-type="filter">
+														<i class="fa fa-level-up" ></i> Revisión</button>
+														<button type="button" class="btn btn-default" style="margin-top: 5px;padding:2px" attach-click="prop_send" attach-type="filter">
+														<i class="fa fa-send-o" ></i> Prop.Enviada</button>
+													</section>
+
+												</div>
+											</fieldset>
+											<footer>
+												<button type="button"  class="btn btn-primary pull-left" onclick="document.location.href='/admin/modulos/prospectos/php/prospect_new.php'">
+												<i class="fa fa-plus"></i>
+												Nuevo Prospec.</button>
+												<button type="submit"  class="btn btn-primary" onclick="$('#frm_filter_clientes').submit();">
+												<i class="fa fa-search"></i>
+												Buscar</button>
+												<button type="button" attach-click attach-type="cleanFormSearch" class="btn btn-default"><i class="fa fa-eraser"></i> Limpiar</button>
+											</footer>
+							
+
+										</form> <!-- FILTRO ESTDO -->
+									</div>
+									<!-- end widget content -->
+								</div>
+								<!-- end widget div -->
+							</div>
+							<!-- end widget -->
+							
+							
+						
+						</article>
+						<article class="col-sm-12">
+							<div class="table-responsive mt-1"> 
+										
+									<table class="table table-bordered .table-hover .smart-form" id="datatable-buttons">
+                                        <thead>
+                                        <tr>
+                                        	<th></th>
+                                        	<th>CTRAL.</th>
+											<th>CREDITO</th>
+											<th>DEBE</th>
+											<th>NOMBRE</th>
+											<th>CEL</th>
+											<th>ACCIONES</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+										<!-- $INI_LOOP_PROSPECTOS$  -->
+                                        <tr>
+                                        	<td>
+                                        		<i class="fa fa-heart" style="$TXT_SHOW_OPORTUNIDAD$;color:red" title="Oportunidad"></i> 
+                                        		<i class="fa fa-level-up" style="$TXT_SHOW_REVISION$;color:red" title="Revisión"></i> 
+                                        		<i class="fa fa-question-circle" style="$TXT_SHOW_ORIG_CONSUL$;" title="Origen Consulta"></i>
+                                        		<span style="$TXT_SHOW_PROP_SEND$;">(<i class="fa fa-send-o"  title="Prop. Enviada"></i> $TXT_CANT_PROP_SEND$)</span>
+                                        	</td>
+                                        	<td>$TXT_ID_REGION$</td>
+											<td>$TXT_ID_CREDITO$</td>
+											<td>$TXT_DEBE$</td>
+											<td><b>$TXT_NOMBRE$</b></td>
+											<td>$TXT_CEL$</td>
+											<td>
+												<button type="button" class="btn btn-primary" style="margin-top: 5px;padding:2px" attach-click="$TXT_ID_PROSPECT$" attach-type="procesar">
+													<span class="fa fa-check-square-o"></span>
+													Procesar</button>
+												<button type="button" class="btn btn-primary" style="margin-top: 5px;padding:2px;background-color:green" attach-click="$TXT_ID_PROSPECT$" attach-type="noQuiere">
+													<span class="fa fa-thumbs-down"></span>
+													NQ</button>
+												<button type="button" class="btn btn-primary" style="margin-top: 5px;padding:2px;background-color:red" attach-click="$TXT_ID_PROSPECT$" attach-type="noRenovar">
+													<span class="fa fa-times"></span>
+													NR</button>
+												<button type="button" class="btn btn-default" style="margin-top: 5px;padding:2px" attach-click="$TXT_ID_PROSPECT$" attach-type="history">
+													<span class="fa fa-history"></span>
+													Historial</button>
+													 
+											</td>
+                                        </tr>
+										<!-- $END_LOOP_PROSPECTOS$  -->
+
+                                        </tbody>
+                                    </table>
+                                    <form action="cliente.php" method="post" id="frm_user">
+													<input type="hidden" name="id_cliente" id="id_cliente_send"/>
+													<input type="hidden" name="ver_saldo" id="ver_saldo"/>
+									</form>
+                                </div> 
+						</article>
+					</div>
+
+					<!-- end row -->
+
+				</section>
+				<!-- end widget grid -->
+
+			<!-- Modal -->
+				<div class="modal fade" id="modal-history" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+									&times;
+								</button>
+								<h4 class="modal-title" id="myModalLabel">Historial</h4>
+							</div>
+							<div class="modal-body">
+				
+								<div class="row">
+									<table class="table table-bordered .table-hover .smart-form" id="history">
+                                        <thead>
+                                        <tr>
+                                        	<th>FECHA</th>
+											<th>??</th>
+											
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                        	<td>10/12/2018</td>
+											<td>??</td>
+
+                                        </tr>
+                                        </tbody>
+                                    </table>
+								</div>
+				
+							</div>
+							<div class="modal-footer">
+								<form method="post" >
+								<button type="button" data-dismiss="modal" class="btn btn-primary">
+									<i class="fa fa-close"></i>
+									Cerrar
+								</button>
+								</form>
+							</div>
+						</div><!-- /.modal-content -->
+					</div><!-- /.modal-dialog -->
+				</div><!-- /.modal -->
+				
+				
+				
+				
+			</div>
+			<!-- END MAIN CONTENT -->
+
+		</div>
+		<!-- END MAIN PANEL -->
+
+				
+		$TXT_INCLUDE_FOOTER$
+
+		
+
+
+
+		<!-- MAIN APP JS FILE -->
+		<script src="/admin/js/app.js"></script>
+		<script src="/admin/modulos/prospectos/js/app.prospect_main.js?v=1.0"></script>
+
+	</body>
+
+</html>

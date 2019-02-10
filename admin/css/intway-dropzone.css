@@ -1,0 +1,38 @@
+#sortable>div { float: left; }
+  #sortable { list-style-type: none; margin: 5px; padding: 5px; width: 100%;height:230px }
+  #sortable li { margin: 0 5px 5px 5px; padding: 5px; font-size: 1.2em; height: 1.5em; }
+  html>body #sortable li { height: 1.5em; line-height: 1.2em; }
+  .ui-state-highlight { width:100px;height: 100px; line-height: 0px;background-color: gray ;border-color: #ffffff}
+	.ui-state-default {
+		background-color: white !important;
+		border-radius: 5px 5px 5px 5px !important;
+		-moz-border-radius: 5px 5px 5px 5px !important;
+		-webkit-border-radius: 5px 5px 5px 5px !important;
+		border: 1px solid #BBBBBB !important;
+  }
+	.img-thumbnail-red {
+		border:1px solid #ff0000;
+}
+
+/*ICON ON IMAGE*/
+.profile-pic {
+	position: relative;
+	display: inline-block;
+}
+
+.profile-pic:hover .edit {
+	display: block;
+}
+
+.edit {
+	padding-top: 7px;	
+	padding-right: 10px;
+	position: absolute;
+	right: 0;
+	top: 0;
+	display: none;
+}
+
+.edit a {
+	color: #000;
+}
