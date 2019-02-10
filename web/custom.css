@@ -1,0 +1,85 @@
+/*
+  You can add your own CSS in this file, this code will overwrite main stylesheet file.
+*/
+
+/*
+@import url(http://fonts.googleapis.com/css?family=example);
+*/
+
+/*
+If you want to change fonts decomentate and overwrite with your font name
+*/
+
+/*
+body {
+	font-family: 'fontName';
+}
+*/
+
+/*
+h1, h2, h3, h4, h5, h6 {
+	font-family: 'fontName';
+}
+*/
+
+/*
+p {
+	font-family: 'fontName';
+}
+*/
+
+/*
+span {
+	font-family: 'fontName';
+}
+*/
+
+/*
+input, textarea, select, label, small {
+	font-family: 'fontName';
+}
+*/
+
+.pricing-plan {
+  background: #ffffff;
+}
+
+#totalPayContainer {
+  display: none;
+  background: rgb(255, 255, 255);
+  text-align: center;
+  margin-right: auto;
+  margin-left: auto;
+  border-top: 3px #fafafa solid;
+}
+
+/*
+  And some media queries for you
+*/
+
+@media screen and (max-width: 1024px) {}
+
+@media screen and (max-width: 768px) {}
+
+@media screen and (min-width: 300px) and (max-width: 400px) {
+  .status {
+    width: auto;
+  }
+  .pricing-plan .price-head h1, .pricing-plan .price-head h2, .pricing-plan .price-head h3, .pricing-plan .price-head h4, .pricing-plan .price-head h5, .pricing-plan .price-head h6 {
+    font-size: 18px;
+    text-align: center;
+    margin-right: auto;
+    margin-left: auto;
+  }
+  .pricing-plan .price-head .price-value {
+    font-size: 16px;
+    text-align: center;
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  header .header-content .header-text h1, header .header-content .vertical-align-middle h1, header .vertical-align .header-text h1, header .vertical-align .vertical-align-middle h1 {
+    font-weight: 900;
+    font-size: 35px;
+}
+}

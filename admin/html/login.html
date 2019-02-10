@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en-us" id="extr-page">
+	$TXT_INCLUDE_HEAD$
+	<style>
+	.center-block {
+   margin-left:auto;
+   margin-right:auto;
+   display:block;
+}
+	</style>
+	<body class="animated fadeInDown">
+
+		<header id="header">
+
+			<div id="logo-group" >
+				<span id="logo"> <img src="/images/logo-light.png"  width="150px" style="margin-top:-22px"> </span>
+			</div>
+
+		</header>
+
+		<div id="main" role="main" style="padding-top:0px">
+
+			<!-- MAIN CONTENT -->
+			<div id="content" class="bgfacturacion" style="height:84vh">
+				<div class="row" >
+					<div class="col-md-4 hidden-xs col-sm-3"></div>
+					<div class="col-md-4 col-xs-12 col-sm-6">
+						$INI_IFZONE_ERROR$
+						<div class="alert alert-danger fade in">
+							<button class="close" data-dismiss="alert">
+								×
+							</button>
+							<i class="fa-fw fa fa-times"></i>
+							<strong>Error!</strong> Acceso Denegado.
+						</div>
+						$END_IFZONE_ERROR$
+						<div class="well no-padding" >
+							
+							<form action="login.php" id="login-form" class="smart-form client-form" method="POST">
+								<header>
+									Ingresar al Sistema
+								</header>
+
+								<fieldset>
+									
+									<section>
+										<label class="label">E-mail</label>
+										<label class="input"> <i class="icon-append fa fa-user"></i>
+											<input type="email" name="email">
+											<b class="tooltip tooltip-top-right"><i class="fa fa-user txt-color-teal"></i> Ingrese su email</b></label>
+									</section>
+
+									<section>
+										<label class="label">Clave</label>
+										<label class="input"> <i class="icon-append fa fa-lock"></i>
+											<input type="password" name="password">
+											<b class="tooltip tooltip-top-right"><i class="fa fa-lock txt-color-teal"></i> Ingrese su Clave</b> </label>
+										<div class="note">
+											<a href="/admin/modulos/usuarios/php/forgotpassword.php">Olvidó Su Clave?</a>
+										</div>
+									</section>
+
+									<section>
+										<label class="checkbox">
+											<input type="checkbox" name="remember" value="1" checked="">
+											<i></i>Recordarme</label>
+									</section>
+								</fieldset>
+								<footer>
+									<button type="submit" class="btn btn-primary">
+										<i class="fa fa-sign-in"></i>
+										Acceder
+									</button>
+								</footer>
+							</form>
+						</div>
+						
+					</div>
+					
+				</div>
+			</div>
+
+		</div>
+
+		<!--================================================== -->	
+
+		<!-- PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices)-->
+		<script src="js/plugin/pace/pace.min.js"></script>
+
+	    <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
+	    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script> if (!window.jQuery) { document.write('<script src="js/libs/jquery-3.2.1.min.js"><\/script>');} </script>
+
+	    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+		<script> if (!window.jQuery.ui) { document.write('<script src="js/libs/jquery-ui.min.js"><\/script>');} </script>
+
+		<!-- IMPORTANT: APP CONFIG -->
+		<script src="js/app.config.js"></script>
+
+		<!-- JS TOUCH : include this plugin for mobile drag / drop touch events 		
+		<script src="js/plugin/jquery-touch/jquery.ui.touch-punch.min.js"></script> -->
+
+		<!-- BOOTSTRAP JS -->		
+		<script src="js/bootstrap/bootstrap.min.js"></script>
+
+		<!-- JQUERY VALIDATE -->
+		<script src="js/plugin/jquery-validate/jquery.validate.min.js"></script>
+		
+		<!-- JQUERY MASKED INPUT -->
+		<script src="js/plugin/masked-input/jquery.maskedinput.min.js"></script>
+		
+		<!--[if IE 8]>
+			
+			<h1>Your browser is out of date, please update your browser by going to www.microsoft.com/download</h1>
+			
+		<![endif]-->
+
+		<!-- MAIN APP JS FILE -->
+		<script src="js/app.min.js"></script>
+
+		<script>
+			runAllForms();
+
+			$(function() {
+				// Validation
+				$("#login-form").validate({
+					// Rules for form validation
+					rules : {
+						email : {
+							required : true,
+							email : true
+						},
+						password : {
+							required : true,
+							minlength : 3,
+							maxlength : 20
+						}
+					},
+
+					// Messages for form validation
+					messages : {
+						email : {
+							required : 'Por favor ingrese su email',
+							email : 'Ingrese un email válido'
+						},
+						password : {
+							required : 'Por favor ingrese su clave'
+						}
+					},
+
+					// Do not change code below
+					errorPlacement : function(error, element) {
+						error.insertAfter(element.parent());
+					}
+				});
+			});
+		</script>
+
+	</body>
+</html>

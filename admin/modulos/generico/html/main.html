@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en-us">
+	$TXT_INCLUDE_HEAD$
+	
+	<!--
+
+	TABLE OF CONTENTS.
+	
+	Use search to find needed section.
+	
+	===================================================================
+	
+	|  01. #CSS Links                |  all CSS links and file paths  |
+	|  02. #FAVICONS                 |  Favicon links and file paths  |
+	|  03. #GOOGLE FONT              |  Google font link              |
+	|  04. #APP SCREEN / ICONS       |  app icons, screen backdrops   |
+	|  05. #BODY                     |  body tag                      |
+	|  06. #HEADER                   |  header tag                    |
+	|  07. #PROJECTS                 |  project lists                 |
+	|  08. #TOGGLE LAYOUT BUTTONS    |  layout buttons and actions    |
+	|  09. #MOBILE                   |  mobile view dropdown          |
+	|  10. #SEARCH                   |  search field                  |
+	|  11. #NAVIGATION               |  left panel & navigation       |
+	|  12. #RIGHT PANEL              |  right panel userlist          |
+	|  13. #MAIN PANEL               |  main panel                    |
+	|  14. #MAIN CONTENT             |  content holder                |
+	|  15. #PAGE FOOTER              |  page footer                   |
+	|  16. #SHORTCUT AREA            |  dropdown shortcuts area       |
+	|  17. #PLUGINS                  |  all scripts and plugins       |
+	
+	===================================================================
+	
+	-->
+	
+	<!-- #BODY -->
+	<!-- Possible Classes
+
+		* 'smart-style-{SKIN#}'
+		* 'smart-rtl'         - Switch theme mode to RTL
+		* 'menu-on-top'       - Switch to top navigation (no DOM change required)
+		* 'no-menu'			  - Hides the menu completely
+		* 'hidden-menu'       - Hides the main menu but still accessable by hovering over left edge
+		* 'fixed-header'      - Fixes the header
+		* 'fixed-navigation'  - Fixes the main menu
+		* 'fixed-ribbon'      - Fixes breadcrumb
+		* 'fixed-page-footer' - Fixes footer
+		* 'container'         - boxed layout mode (non-responsive: will not work with fixed-navigation & fixed-ribbon)
+	-->
+	<body class="$TXT_CLASS_LF$">
+
+		$TXT_INCLUDE_BODY_HEAD$
+
+		$TXT_INCLUDE_NAVIGATION_PANEL$
+
+		<!-- MAIN PANEL -->
+		<div id="main" role="main">
+
+			<!-- RIBBON -->
+			<div id="ribbon">
+
+
+				<!-- breadcrumb -->
+				<ol class="breadcrumb">
+					<li>Datos Paramétricos</li>
+				</ol>
+				
+				<!-- end breadcrumb -->
+
+				<!-- You can also add more buttons to the
+				ribbon for further usability
+
+				Example below:
+
+				<span class="ribbon-button-alignment pull-right">
+				<span id="search" class="btn btn-ribbon hidden-xs" data-title="search"><i class="fa-grid"></i> Change Grid</span>
+				<span id="add" class="btn btn-ribbon hidden-xs" data-title="add"><i class="fa-plus"></i> Add</span>
+				<span id="search" class="btn btn-ribbon" data-title="search"><i class="fa-search"></i> <span class="hidden-mobile">Search</span></span>
+				</span> -->
+
+			</div>
+			
+			<!-- END RIBBON -->
+
+			<!-- MAIN CONTENT -->
+			<div id="content">
+
+
+				<!-- widget grid -->
+				<section id="widget-grid" class="">
+
+					<!-- row -->
+					<div class="row">
+						<article class="col-sm-12">
+						
+							<!-- Widget ID (each widget will need unique ID)-->
+							<div class="jarviswidget" id="wid-id-8" data-widget-editbutton="false" data-widget-custombutton="false" data-widget-colorbutton="false"	
+									data-widget-editbutton="false"
+									data-widget-togglebutton="false"
+									data-widget-deletebutton="false"
+									data-widget-fullscreenbutton="false"
+									data-widget-custombutton="false"
+									data-widget-collapsed="false" 
+									data-widget-sortable="false">
+								<header>
+									<span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+									<h2>Buscar Rubro</h2>				
+									
+								</header>
+				
+								<!-- widget div-->
+								<div>
+									<!-- widget content -->
+									<div class="widget-body no-padding">
+										<form action="main.php" id="frm_filter_rubros" method="post" class="smart-form">
+										<input type="hidden" name="filtro_estado" value="1"/>
+										<fieldset>					
+												<div class="row">
+													<!-- section class="col col-1">
+														<label class="label">Filtrar Estado</label>
+														<select class="form-control" filtros id="estado" name="estado">
+															<option value="1">Activos</option>
+															<option value="0" $TXT_SELECTED_ELIMINADO$>Eliminados</option>
+														</select>
+													</section>  -->
+													<section class="col col-3">
+														<label class="label">Categoría</label>
+														<select class="form-control" filtros id="id_categoria_padre" name="id_categoria_padre" >
+															<option value="">TODOS</option>
+															$INI_LOOP_CATEGORIAS$
+															<option $TXT_SELECTED$ value="$TXT_ID_LOOP_CATEGORIA$">$TXT_DESC_CATEGORIA$</option>
+															$END_LOOP_CATEGORIAS$
+														</select>
+													</section>
+
+												</div>
+											</fieldset>
+										<!-- FILTRO ESTDO -->
+							
+
+										</form> <!-- FILTRO ESTDO -->
+									</div>
+									<!-- end widget content -->
+								</div>
+								<!-- end widget div -->
+							</div>
+							<!-- end widget -->
+							
+							
+						
+						</article>
+						<article class="col-sm-12">
+							<a href="edit.php" style="display: $TXT_DISPLAY_ALTA$" class="btn btn-primary ml-4"><span class="ion-person-add"></span>
+							<i class="fa fa-plus"></i> 
+							Alta de Dato Paramétrico</a>
+						</article>
+						<article class="col-sm-12">
+							<div class="table-responsive mt-1">
+										
+									<table class="table table-bordered .table-hover .smart-form" id="datatable-buttons">
+                                        <thead>
+                                        <tr>
+                                        	<th class="col-xs-3">Categoría</th>
+											<th class="col-xs-3">Nombre</th>
+											<th class="col-xs-2">Valor</th>
+											<th style="width:20%">Acción</th>
+										</tr>
+                                        </thead>
+                                        <tbody>
+											<!-- $INI_LOOP_DATOS_PARAM$  -->
+											<tr>
+												<td>$TXT_CATEGORIA$</td>
+												<td>$TXT_NOMBRE$</td>
+												<td>$TXT_VALOR$</td>
+												<td>
+													<form action="edit.php" method="post">
+														<input type="hidden" name="id_dato" id="id_dato" value="$TXT_ID_DATO$"/>
+														$INI_IFZONE_BTN_ELIMINAR$
+														<button type="submit" id="btn_guardar" class="btn btn-primary waves-effect waves-light mt-1">
+															<i class="fa fa-edit"></i>
+															Modificar
+															</button>
+														
+														<button type="button" id="btn_elim" eliminar="$TXT_ID_DATO$" data-name="$TXT_NOMBRE$" class="btn btn-secondary waves-effect mt-1" data-toggle="modal" data-target="#full-width-modal">
+															<i class="fa fa-trash"></i>
+														Eliminar</button>
+														$END_IFZONE_BTN_ELIMINAR$
+														$INI_IFZONE_BTN_ACTIVAR$
+														<button type="button" id="btn_activ" activar="$TXT_ID_DATO$" class="btn btn-secondary waves-effect mt-1" data-toggle="modal" data-target="#full-width-modal">Activar</button>
+														$END_IFZONE_BTN_ACTIVAR$
+													</form>
+												</td>
+											</tr>
+											<!-- $END_LOOP_DATOS_PARAM$  -->
+
+                                        </tbody>
+                                    </table>
+                                </div>
+						</article>
+					</div>
+
+					<!-- end row -->
+
+				</section>
+				<!-- end widget grid -->
+
+			<!-- Modal -->
+				<div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+									&times;
+								</button>
+								<h4 class="modal-title" id="myModalLabel">Eliminar Registro</h4>
+							</div>
+							<div class="modal-body">
+				
+								<div class="row">
+								<span>Desea Eliminar </span><span id="nombre_reg_elim"></span>
+								</div>
+				
+							</div>
+							<div class="modal-footer">
+								<form method="post" >
+								<input type="hidden" name="id_cliente" id="id_dato" />
+								<button type="button" class="btn btn-default" data-dismiss="modal">
+									Cancelar
+								</button>
+								<button type="button" onclick="eliminar()" class="btn btn-primary">
+									Eliminar
+								</button>
+								</form>
+							</div>
+						</div><!-- /.modal-content -->
+					</div><!-- /.modal-dialog -->
+				</div><!-- /.modal -->
+				
+				
+				<div class="modal fade" id="confirm-activar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+									&times;
+								</button>
+								<h4 class="modal-title" id="myModalLabel">Activar Rubro</h4>
+							</div>
+							<div class="modal-body">
+				
+								<div class="row">
+								<span>Desea Activar El Rubro?</span>
+								</div>
+				
+							</div>
+							<div class="modal-footer">
+								<form method="post" >
+								<input type="hidden" name="id_cliente" id="id_cliente" />
+								<button type="button" class="btn btn-default" data-dismiss="modal">
+									Cancelar
+								</button>
+								<button type="button" onclick="activar()" class="btn btn-primary">
+									Activar
+								</button>
+								</form>
+							</div>
+						</div><!-- /.modal-content -->
+					</div><!-- /.modal-dialog -->
+				</div><!-- /.modal -->
+				
+			</div>
+			<!-- END MAIN CONTENT -->
+
+		</div>
+		<!-- END MAIN PANEL -->
+
+		$TXT_INCLUDE_FOOTER$
+
+		
+
+
+
+		<!-- MAIN APP JS FILE -->
+		<script src="/admin/js/app.js"></script>
+		<script src="/admin/modulos/generico/js/app.main.js"></script>
+		
+
+
+	</body>
+
+</html>

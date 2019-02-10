@@ -1,0 +1,22 @@
+[06-Feb-2019 11:36:56 America/Argentina/Buenos_Aires] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'd.code' in 'where clause' in /home/followdevelopcom/iap.follow-develop.com.ar/admin/php/dao/DatosDao.php:94
+Stack trace:
+#0 /home/followdevelopcom/iap.follow-develop.com.ar/admin/php/dao/DatosDao.php(94): PDOStatement->execute()
+#1 /home/followdevelopcom/iap.follow-develop.com.ar/admin/php/services/DatosService.php(30): DatosDao->load(Object(DatoFilter))
+#2 /home/followdevelopcom/iap.follow-develop.com.ar/admin/modulos/participantes/php/participantes_main.php(40): DatosService->load(Object(DatoFilter))
+#3 {main}
+  thrown in /home/followdevelopcom/iap.follow-develop.com.ar/admin/php/dao/DatosDao.php on line 94
+[06-Feb-2019 11:40:35 America/Argentina/Buenos_Aires] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'outer join followdevelopcom_iap_site.TICKET t on t.ID=d.TICKET_ID
+            IN' at line 14 in /home/followdevelopcom/iap.follow-develop.com.ar/admin/php/dao/DatosDao.php:93
+Stack trace:
+#0 /home/followdevelopcom/iap.follow-develop.com.ar/admin/php/dao/DatosDao.php(93): PDOStatement->execute()
+#1 /home/followdevelopcom/iap.follow-develop.com.ar/admin/php/services/DatosService.php(30): DatosDao->load(Object(DatoFilter))
+#2 /home/followdevelopcom/iap.follow-develop.com.ar/admin/modulos/participantes/php/participantes_main.php(40): DatosService->load(Object(DatoFilter))
+#3 {main}
+  thrown in /home/followdevelopcom/iap.follow-develop.com.ar/admin/php/dao/DatosDao.php on line 93
+[06-Feb-2019 11:49:18 America/Argentina/Buenos_Aires] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'i.code<>'' AND d.EMAIL<>'' ORDER BY d.ID DESC' at line 15 in /home/followdevelopcom/iap.follow-develop.com.ar/admin/php/dao/DatosDao.php:96
+Stack trace:
+#0 /home/followdevelopcom/iap.follow-develop.com.ar/admin/php/dao/DatosDao.php(96): PDOStatement->execute()
+#1 /home/followdevelopcom/iap.follow-develop.com.ar/admin/php/services/DatosService.php(30): DatosDao->load(Object(DatoFilter))
+#2 /home/followdevelopcom/iap.follow-develop.com.ar/admin/modulos/participantes/php/participantes_main.php(40): DatosService->load(Object(DatoFilter))
+#3 {main}
+  thrown in /home/followdevelopcom/iap.follow-develop.com.ar/admin/php/dao/DatosDao.php on line 96
