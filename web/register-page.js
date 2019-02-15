@@ -34,6 +34,7 @@ var EARLY_BIRD_MSJ = updatePrice ?
   "* EARLY BIRD BUY *";
 
 var isSubtracted = false;
+var isSubtractedBodyguard = false;
 
 var Participant = {
   'grantingParticipant': false,
@@ -56,6 +57,8 @@ var Participant = {
   },
   'accompanying': false,
   'companion': [],
+  'bodyguard': false,
+  'bodyguardComp': {},
   'committeeMember': false,
   'arrivalDetails': {}
 };
@@ -72,7 +75,9 @@ function initializeRegisterPage() {
   onClickAttend();
   onSelectAttendType();
   onClickAccompanyin();
+  onClickBodyguard();
   onClickAccompanyingToursDay();
+  onClickBodyguardToursDay();
   onClickSocialPresident();
   onClickConferenceDinner();
   onClickNetworkingNight();
@@ -122,7 +127,7 @@ function onClickTicketPlans() {
 
       var Plan_Value = Number($(this).find('.value').text()),
         Plan_Currency = $(this).find('.currency').text(),
-        Plan_Title = $(this).find('h1, h2, h3, h4, h5, h6').text(),
+        Plan_Title = $(this).find('h1, h2, h3, h4, h5, h6').text().replace(/\n/g,'').replace(/\r/g,''),
         Plan_Description = $(this).find('.short-description').text();
 
       if (Plan_Description === "One Day access.") {
@@ -138,7 +143,11 @@ function onClickTicketPlans() {
 
         $('#accompanyingMsj').slideDown();
         $('#accompanyingContent').slideUp();
+        $('#bodyguardContent').slideDown();
+        
         $('#accompanyingContentData').slideUp();
+        $('#bodyguardContentData').slideDown();
+        
         planId = 1;
 
       } else {
@@ -151,7 +160,9 @@ function onClickTicketPlans() {
 
         $('#accompanyingMsj').slideUp();
         $('#accompanyingContent').slideDown();
+        $('#bodyguardContent').slideDown();
         $('#accompanyingContentData').slideDown();
+        $('#bodyguardContentData').slideDown();
         
 
         planId = 2;
@@ -170,7 +181,7 @@ function onClickTicketPlans() {
 
       if (Participant.ticket.id === 2) {
         //navigateTab('ticket-tab', 'accompanying-tab');
-    	  navigateTab('ticket-tab', 'personal-tab');
+    	  navigateTab('ticket-tab', 'passport-tab');
       }
 
       //console.log(Participant);
@@ -199,13 +210,13 @@ function onClickTicketDays() {
           days.push(selecetedDay);
           $('#listSelectedDays').append('<li>' + selecetedDay + '</li>');
           switch (selecetedDay) {
-            case '09/10/2018':
+            case '09/16/2019':
               $('#conferenceDinnerFieldset').slideDown();
               break;
-            case '09/11/2018':
+            case '09/17/2019':
               $('#networkingNightFieldset').slideDown();
               break;
-            case '09/13/2018':
+            case '09/19/2019':
               $('#farewellPartyFieldset').slideDown();
               break;
           }
@@ -317,6 +328,36 @@ function onSelectAttendType() {
   });
 }
 
+function onClickBodyguard() {
+	  var accompanyings = $('input[name="bodyguard"]');
+	  accompanyings.each(function () {
+	    $(this).on('click', function () {
+
+	      $('input[name="bodyguard"]:checked').each(function () {
+	        Participant.bodyguard = $(this).val();
+	        if (Participant.bodyguard == 'true') {
+	          /*$('#accompanyingDiv').slideDown();
+	          $('#textAccompanyingPerson').slideDown();
+	          $('#listSelectedDays').slideDown();*/
+	          Participant.ticket.total = Participant.ticket.value + ((ACCOMPANYING_PRICE/2));
+	          isSubtractedBodyguard = false;
+	        } else if (!isSubtractedBodyguard) {
+	          Participant.ticket.total = Participant.ticket.total - ((ACCOMPANYING_PRICE/2));
+	          /*$('#accompanyingDiv').slideUp();
+	          $('#textAccompanyingPerson').slideUp();
+	          $('#listSelectedDays').slideUp();
+	          delete Participant.companion;*/
+	          isSubtractedBodyguard = true;
+	        }
+	      });
+
+	      updateTotalAmountInfo();
+	      //console.log(Participant);
+
+	    });
+	  });
+	}
+
 function onClickAccompanyin() {
   var accompanyings = $('input[name="accompanying"]');
   accompanyings.each(function () {
@@ -380,6 +421,29 @@ function onClickAccompanyingToursDay() {
   });
 
 }
+
+function onClickBodyguardToursDay() {
+
+	  var bodyguardToursDay = $('input[name="bodyguardToursDay"]');
+	  bodyguardToursDay.each(function () {
+	    $(this).on('click', function () {
+
+	      if (!Participant.bodyguard) {
+	        Participant.bodyguardComp = []
+	      }
+	      var days = [];
+
+	      $('input[name="bodyguardToursDay"]:checked').each(function () {
+	        var selecetedDay = $(this).val();
+	        days.push(selecetedDay);
+	      });
+
+	      Participant.bodyguardComp.bodyguardToursDay = days;
+	      //console.log(Participant);
+	    });
+	  });
+
+	}
 
 function onClickSocialPresident() {
   var socialPresident = $('input[name="socialPresident"]');
@@ -481,63 +545,6 @@ function onClickSocialEventWithAccompanying(attributeName) {
   });
 }
 
-
-function validePassport(data) {
-	  //console.log(attributeName);
-	result = false;
-	  swal({
-	    title: "Have you participated in previous editions?",
-	    icon: "warning",
-	    buttons: {
-	      yes: {
-	        text: "Yes",
-	        value: true,
-	      },
-	      no: {
-	        text: "No",
-	        value: false,
-	      }
-	    }
-	  }).then(function (value) {
-		  result = value;
-		if(value == true){
-			$('#prefix').val(data.prefix);
-	      	onBlurFunction($('#prefix'));	
-	      	
-	      	$('#passportNationality').val(data.passportNationality);
-	      	onBlurFunction($('#passportNationality'));	
-	      	
-	      	$('#firstName').val(data.firstName);
-	      	onBlurFunction($('#firstName'));	
-	      	$('#middleName').val(data.middleName);
-	      	onBlurFunction($('#middleName'));	
-	      	$('#lastName').val(data.lastName);
-	      	onBlurFunction($('#lastName'));	
-	      	
-	      	$('#badgeName').val(data.badgeName);
-	      	onBlurFunction($('#badgeName'));	
-	      	$('#address1').val(data.address1);
-	      	onBlurFunction($('#address1'));	
-	      	$('#passportExpiryDate').val(data.passportExpiryDate);
-	      	onBlurFunction($('#passportExpiryDate'));	
-	      	$('#postalCode').val(data.postalCode);
-	      	onBlurFunction($('#postalCode'));	
-	      	$('#city').val(data.city);
-	      	onBlurFunction($('#city'));	
-	      	$('#country').val(data.country);
-	      	onBlurFunction($('#country'));	
-	      	$('#specialDietaryPhysical').val(data.specialDietaryPhysical);
-	      	onBlurFunction($('#specialDietaryPhysical'));
-			
-		}  
-        
-
-	  });
-}
-
-
-
-
 function onClickLetterInvitation() {
   var letterInvitation = $('input[name="letterInvitation"]');
   letterInvitation.each(function () {
@@ -630,7 +637,36 @@ function loadPassportInfo(object){
         async: false, //blocks window close
         success: function(data) {
         	
-        	validePassport(data);
+        	$('#prefix').val(data.prefix);
+	      	onBlurFunction($('#prefix'));	
+	      	
+	      	$('#passportNumber').val(data.passportNumber);
+	      	onBlurFunction($('#passportNumber'));	
+	      	
+	      	$('#passportNationality').val(data.passportNationality);
+	      	onBlurFunction($('#passportNationality'));	
+	      	
+	      	$('#firstName').val(data.firstName);
+	      	onBlurFunction($('#firstName'));	
+	      	$('#middleName').val(data.middleName);
+	      	onBlurFunction($('#middleName'));	
+	      	$('#lastName').val(data.lastName);
+	      	onBlurFunction($('#lastName'));	
+	      	
+	      	$('#badgeName').val(data.badgeName);
+	      	onBlurFunction($('#badgeName'));	
+	      	$('#address1').val(data.address1);
+	      	onBlurFunction($('#address1'));	
+	      	$('#passportExpiryDate').val(data.passportExpiryDate);
+	      	onBlurFunction($('#passportExpiryDate'));	
+	      	$('#postalCode').val(data.postalCode);
+	      	onBlurFunction($('#postalCode'));	
+	      	$('#city').val(data.city);
+	      	onBlurFunction($('#city'));	
+	      	$('#country').val(data.country);
+	      	onBlurFunction($('#country'));	
+	      	$('#specialDietaryPhysical').val(data.specialDietaryPhysical);
+	      	onBlurFunction($('#specialDietaryPhysical'));
         	
         }
     });
@@ -640,11 +676,13 @@ function loadPassportInfo(object){
 function onBlurFunction(oject){
 	var name = $(oject).attr("name");
 
-    if (name.indexOf('passportNumber') !== -1) {
+    if (name.indexOf('passportNumberLoad') !== -1) {
     	loadPassportInfo(oject);
     }        
     if (name.indexOf('accompanyin') !== -1) {
     	Participant.companion[tabAccomp][name] = $(oject).val();
+    }if (name.indexOf('bodyguard') !== -1) {
+    	Participant.bodyguardComp[name] = $(oject).val();
     } else if (name.indexOf('arrival') !== -1) {
       Participant.arrivalDetails[name] = $(oject).val();
     } else if (name.indexOf('prefix') !== -1) {
@@ -712,14 +750,17 @@ function backDataTab(toTabId){
 
 function backTab(toTabId) {
 
-  if( toTabId == 'accompanying-data-tab' && Participant.accompanying == false){
+  if( toTabId == 'accompanying-data-tab' && (Participant.accompanying == false || Participant.accompanying == 'false')){
 	  toTabId = 'accompanying-tab'
+  }	
+  if( toTabId == 'bodyguard-data-tab' && (Participant.bodyguard == false || Participant.bodyguard == 'false')){
+	  toTabId = 'bodyguard-tab'
   }	
   if ((toTabId === 'social-tab' || toTabId === 'accompanying-tab' || toTabId === 'accompanying-data-tab') && Participant.ticket.id === 1) {
 
     if (Participant.ticket.days.length === 1) {
 
-      if (Participant.ticket.days[0] === '09/12/2018') {
+      if (Participant.ticket.days[0] === '09/18/2019') {
 
         $('.tab').removeClass('active');
         $('.tabLink').removeClass('active');
@@ -749,6 +790,16 @@ function backTab(toTabId) {
       $(document).scrollTop($("#tabTop").offset().top);
       return;
     }
+
+    if (toTabId === 'bodyguard-tab' || toTabId === 'bodyguard-data-tab') {
+
+        $('.tab').removeClass('active');
+        $('.tabLink').removeClass('active');
+        $("#event-tab").addClass('active');
+        $("#event-tab-link").addClass('active');
+        $(document).scrollTop($("#tabTop").offset().top);
+        return;
+      }
 
     $('.tab').removeClass('active');
     $('.tabLink').removeClass('active');
@@ -822,51 +873,59 @@ function navigateTab(fromTabId, toTabId,code) {
   	
   if (validate(fromTabId)) {
 	
-  if(fromTabId == "accompanying-tab" && Participant.accompanying == 'true'){
-		
-		var companions= Participant.companion;
-		Participant.companion = []
-		for (i = 0; i < cantidadAcomp ; i++) {
-			item = {};
-			if(companions[i] != null){
-				Participant.companion.push(companions[i]);
-			}else{
-				$("#accompanying-data-tab :input").each(function() {
+	  if(fromTabId == "accompanying-tab" && Participant.accompanying == 'true'){
+			
+			var companions= Participant.companion;
+			Participant.companion = []
+			for (i = 0; i < cantidadAcomp ; i++) {
+				item = {};
+				if(companions[i] != null){
+					Participant.companion.push(companions[i]);
+				}else{
+					$("#accompanying-data-tab :input").each(function() {
+						
+				        var name = $(this).attr("name");
+				        if(name.indexOf('image')<0){
+				        	var value = null;
+					        item [name] = value;
+				        }
+				        			        
+				    });
 					
-			        var name = $(this).attr("name");
-			        if(name.indexOf('image')<0){
-			        	var value = null;
-				        item [name] = value;
-			        }
-			        			        
-			    });
-				
-				if(!$('#inputAcompImage'+i).length){
-					item ['image']=null;
-					/*html = $('#divAcompImage').html();
-					html+='<input id="inputAcompImage'+i+'" type="file" name="image'+i+'" accept="image/jpg, image/jpeg, image/png" onchange="onFileAcompChange(event)">';
-			        html+='<i id="faImage'+i+'"class="fa fa-image"></i>';
-			        $('#divAcompImage').html(html);
-			        */
-					$('<i id="faImage'+i+'"class="fa fa-image"></i>').insertAfter('#inputAcompImage0');
-					$('<input id="inputAcompImage'+i+'" type="file" name="image'+i+'" accept="image/jpg, image/jpeg, image/png" onchange="onFileAcompChange(event)">').insertAfter('#inputAcompImage0');
-			        
-			        $('#inputAcompImage'+i).hide();
-			        $('#faImage'+i+'').hide();
+					if(!$('#inputAcompImage'+i).length){
+						item ['image']=null;
+						/*html = $('#divAcompImage').html();
+						html+='<input id="inputAcompImage'+i+'" type="file" name="image'+i+'" accept="image/jpg, image/jpeg, image/png" onchange="onFileAcompChange(event)">';
+				        html+='<i id="faImage'+i+'"class="fa fa-image"></i>';
+				        $('#divAcompImage').html(html);
+				        */
+						$('<i id="faImage'+i+'"class="fa fa-image"></i>').insertAfter('#inputAcompImage0');
+						$('<input id="inputAcompImage'+i+'" type="file" name="image'+i+'" accept="image/jpg, image/jpeg, image/png" onchange="onFileAcompChange(event)">').insertAfter('#inputAcompImage0');
+				        
+				        $('#inputAcompImage'+i).hide();
+				        $('#faImage'+i+'').hide();
 
+					}
+					
+					Participant.companion.push(item);
 				}
 				
-				Participant.companion.push(item);
 			}
+			$('#inputAcompImage0').addClass("required");
+			$('#faImage0').show();
+			$('#inputAcompImage0').show();
+	        $('#faImage0').show();
 			
 		}
-		$('#inputAcompImage0').addClass("required");
-		$('#faImage0').show();
-		$('#inputAcompImage0').show();
-        $('#faImage0').show();
-		
-	}
-	  
+		  
+	  if(fromTabId == "bodyguard-tab" && Participant.bodyguard == 'true'){
+			$('#inputAcompImage0').addClass("required");
+			$('#faImage0').show();
+			$('#inputAcompImage0').show();
+	        $('#faImage0').show();
+			
+		}
+		  
 	  
 	
 	if(toTabId == 'accompanying-data-tab' && Participant.accompanying == 'true'){
@@ -875,14 +934,19 @@ function navigateTab(fromTabId, toTabId,code) {
         $('#faImage'+tabAccomp+'').show();
 	}
 	if(fromTabId == "accompanying-tab" && toTabId == "accompanying-data-tab" && (Participant.accompanying == 'false' ||Participant.accompanying == false)){
+		toTabId = "bodyguard-tab";
+	}
+
+	if(fromTabId == "bodyguard-tab" && toTabId == "bodyguard-data-tab" && (Participant.bodyguard == 'false' || Participant.bodyguard == false)){
 		toTabId = "social-tab";
 	}
-		
+
+	
 	
     if ((fromTabId === 'event-tab' && toTabId == 'accompanying-tab') && Participant.ticket.id === 1) {
 
       if (Participant.ticket.days.length == 1) {
-        if (Participant.ticket.days[0] === '09/12/2018') {
+        if (Participant.ticket.days[0] === '09/18/2019') {
           $('.tab').removeClass('active');
           $('.tabLink').removeClass('active');
           $("#requests-tab").addClass('active');
@@ -914,6 +978,16 @@ function navigateTab(fromTabId, toTabId,code) {
 }
 
 
+
+function onFileBodyguardChange(event) {
+	  var target = event.target || event.srcElement;
+	  var files = target.files;
+	  if (files.length > 0) {
+	    var fileInfo = files[0];
+	    this.handleBodyguardImageLoad(fileInfo);
+	  }
+	}
+
 function onFileAcompChange(event) {
 	  var target = event.target || event.srcElement;
 	  var files = target.files;
@@ -931,6 +1005,34 @@ function onFileChange(event) {
     this.handleImageLoad(fileInfo);
   }
 }
+
+
+function handleBodyguardImageLoad(fileInfo) {
+
+	  //console.log(fileInfo.type);
+
+	  if (fileInfo.type != 'image/png' && fileInfo.type != 'image/jpeg' && fileInfo.type != 'image/jpg') {
+	    swal("Bad Format!", "Only accept image with .jpeg or .png format!", "warning");
+	    $("#inputBodyguardImage0").val('');
+	    return;
+	  }
+
+	  if (fileInfo.size > 2000000) {
+	    swal("Max size exceeded!", "The image size its to big, max size 2000 kilobytes!", "warning");
+	    $("#inputBodyguardImage0").val('');
+	    return;
+	  }
+
+	  var readerAsDataURL = new FileReader();
+	  readerAsDataURL.onloadend = function preview(e) {
+	    $('#profileBodyguardImage').attr('src', readerAsDataURL.result);
+	    Participant.bodyguardComp.image = readerAsDataURL.result.split(',').pop();
+	    Participant.bodyguardComp.imageName = fileInfo.name;
+	  };
+	  readerAsDataURL.readAsDataURL(fileInfo);
+
+	}
+
 
 function handleAcompImageLoad(fileInfo) {
 
@@ -1283,7 +1385,7 @@ function paypalTAb(code){
 	    env: 'sandbox', // sandbox | production
 
 	    client: {
-	        sandbox:    'AesOaplkxbCzCNZTDT-NG8ejYSzGRjqBPLlqO69tnduI30JEOZFDhAFLEFErTKz-UArBX5Tfunm2_20l',
+	        sandbox:    'AfM-ISPopqS8Vz7e4j5fMg8XS4u1oXorsO4GXVfEnLSBfy92s0T2BgC40yDr6SGcmZ_tJ1Nx8aheU1cL',
 	        production: '<insert production client id>'
 	    },
 	    commit: true,

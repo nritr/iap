@@ -7,6 +7,7 @@ class DatoFilter extends Filter {
     public $idCompanion;//filtro para el dado de companion, trae el companion por id, igualmente para traer por id, usar getById() del service de companion
     public $passportNumber='';
     public $code='';
+    public $existsTicket;
     private $filterSql = "";
     private $valueSql = "";
     public function __construct($id=null) {

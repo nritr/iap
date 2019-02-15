@@ -61,8 +61,10 @@ class DatosDao {
 		    $where.= $filter->getDynamicFilter();
 		}
 		if ($filter->code != '') {
-		    
 		    $where.= " AND i.CODE=:code";
+		}
+		if ($filter->existsTicket>0) {
+		    $where.= " AND EXISTS (SELECT t.ID FROM TICKET t WHERE d.TICKET_ID=t.ID)";
 		}
 		$sql = "
             select
@@ -78,11 +80,11 @@ class DatosDao {
             t.ID as TICKET_ID,t.DESCRIPTION,t.VALUE,t.TOTAL,t.TYPE,".
             " i.STATUS, i.IMAGE, i.ARRIVED, i.CODE, i.TRANSACTION, i.TRANSACTION_CODE ".
             " FROM followdevelopcom_iap_site.DATOS d
-            INNER join followdevelopcom_iap_site.SOCIAL s on d.SOCIAL_ID = s.ID
+            LEFT join followdevelopcom_iap_site.SOCIAL s on d.SOCIAL_ID = s.ID
             LEFT join followdevelopcom_iap_site.ARRIVAL_DETAILS ad on ad.ID = d.ARRIVAL_DETAILS_ID
-            INNER join followdevelopcom_iap_site.TICKET t on t.ID=d.TICKET_ID
-            INNER join followdevelopcom_iap_site.REQUESTS r on r.id = d.REQUESTS_ID ".
-           " INNER JOIN followdevelopcom_iap_site.INSCRIPTIONS i ON i.VALUES_ID=d.ID ".
+            LEFT join followdevelopcom_iap_site.TICKET t on t.ID=d.TICKET_ID
+            LEFT join followdevelopcom_iap_site.REQUESTS r on r.id = d.REQUESTS_ID ".
+           " LEFT JOIN followdevelopcom_iap_site.INSCRIPTIONS i ON i.VALUES_ID=d.ID ".
             " WHERE 1 ".$where.
             " ORDER BY d.ID DESC";
 
@@ -124,7 +126,7 @@ class DatosDao {
 			$dato->social->president                     = $fila['PRESIDENT'];
 			$dato->social->accompanyingConferenceDinner  = $fila['ACCOMPANYING_CONFERENCE_DINNER'];
 			$dato->social->accompanyngPresident          = $fila['ACCOMPANYING_PRESIDENT'];
-			$dato->social->accompanyingFarewellParty      = $fila['ACCOMPANYING_FAREWELL_PARTY'];
+			$dato->social->accompanyingFarewellParty     = $fila['ACCOMPANYING_FAREWELL_PARTY'];
 			$dato->social->networkingNight               = $fila['NETWORKING_NIGHT'];
 			$dato->social->conferenceDinner              = $fila['CONFERENCE_DINNER'];
 			$dato->social->farewellParty                 = $fila['FAREWELL_PARTY'];
@@ -298,12 +300,12 @@ class DatosDao {
         
     }
     
-    public function saveAccompanyng(Datos &$dato) {
+    public function saveAccompanyng(Datos &$dato,$bodyGuard) {
         
         foreach ($dato->companionArray as &$comp) {
             $sql = "INSERT INTO `followdevelopcom_iap_site`.`COMPANION`
-                    (`ID_DATOS`,`ACCOMPANYING_FIRST_NAME`,`ACCOMPANYING_LAST_NAME`,`ACCOMPANYING_BADGE_NAME`,`ACCOMPANYING_IMAGE`,`SPECIAL_DIET_PHYSICAL`)
-                    VALUES(:ID_DATOS,:ACCOMPANYING_FIRST_NAME,:ACCOMPANYING_LAST_NAME,:ACCOMPANYING_BADGE_NAME,:ACCOMPANYING_IMAGE,:SPECIAL_DIET_PHYSICAL);";
+                    (`ID_DATOS`,`ACCOMPANYING_FIRST_NAME`,`ACCOMPANYING_LAST_NAME`,`ACCOMPANYING_BADGE_NAME`,`ACCOMPANYING_IMAGE`,`SPECIAL_DIET_PHYSICAL`,`IS_BODYGUARD`)
+                    VALUES(:ID_DATOS,:ACCOMPANYING_FIRST_NAME,:ACCOMPANYING_LAST_NAME,:ACCOMPANYING_BADGE_NAME,:ACCOMPANYING_IMAGE,:SPECIAL_DIET_PHYSICAL,:IS_BODYGUARD);";
             
             $stmt = $this->conn->prepare($sql);
             
@@ -313,6 +315,7 @@ class DatosDao {
             $stmt->bindValue(':ACCOMPANYING_BADGE_NAME', $comp->accompanyingLastName,PDO::PARAM_STR);
             $stmt->bindValue(':ACCOMPANYING_IMAGE', $comp->image,PDO::PARAM_STR);
             $stmt->bindValue(':SPECIAL_DIET_PHYSICAL', $comp->specialDietaryPhysical,PDO::PARAM_STR);
+            $stmt->bindValue(':IS_BODYGUARD', $bodyGuard,PDO::PARAM_INT);
             
             $result = $stmt->execute();
             $id = $this->conn->lastInsertId();
@@ -325,11 +328,36 @@ class DatosDao {
         }
     }
     
+    public function saveBodyguard(Datos &$dato,$bodyGuard) {
+        
+        $sql = "INSERT INTO `followdevelopcom_iap_site`.`COMPANION`
+                (`ID_DATOS`,`ACCOMPANYING_FIRST_NAME`,`ACCOMPANYING_LAST_NAME`,`ACCOMPANYING_BADGE_NAME`,`ACCOMPANYING_IMAGE`,`SPECIAL_DIET_PHYSICAL`,`IS_BODYGUARD`)
+                VALUES(:ID_DATOS,:ACCOMPANYING_FIRST_NAME,:ACCOMPANYING_LAST_NAME,:ACCOMPANYING_BADGE_NAME,:ACCOMPANYING_IMAGE,:SPECIAL_DIET_PHYSICAL,:IS_BODYGUARD);";
+        
+        $stmt = $this->conn->prepare($sql);
+        
+        $stmt->bindValue(':ID_DATOS', $dato->id,PDO::PARAM_INT);
+        $stmt->bindValue(':ACCOMPANYING_FIRST_NAME', $dato->bodyguardAdd->accompanyingFirstName,PDO::PARAM_STR);
+        $stmt->bindValue(':ACCOMPANYING_LAST_NAME', $dato->bodyguardAdd->accompanyingLastName,PDO::PARAM_STR);
+        $stmt->bindValue(':ACCOMPANYING_BADGE_NAME', $dato->bodyguardAdd->accompanyingLastName,PDO::PARAM_STR);
+        $stmt->bindValue(':ACCOMPANYING_IMAGE', $dato->bodyguardAdd->image,PDO::PARAM_STR);
+        $stmt->bindValue(':SPECIAL_DIET_PHYSICAL', $dato->bodyguardAdd->specialDietaryPhysical,PDO::PARAM_STR);
+        $stmt->bindValue(':IS_BODYGUARD', $bodyGuard,PDO::PARAM_INT);
+        
+        $result = $stmt->execute();
+        $id = $this->conn->lastInsertId();
+        if($dato->bodyguardAdd->accompanyingToursDay != null){
+            foreach ($dato->bodyguardAdd->accompanyingToursDay as &$day){
+                $this->saveAccompanyingDay($day,$id);
+            }
+        }
+    }
+    
     
     public function saveAccompanyingDay(&$day,$compId) {
         $sql = "INSERT INTO `followdevelopcom_iap_site`.`DAYS`
             (`TICKET_ID`,`COMPANION_ID`,`DAY`)
-            VALUES(0,:COMP_ID,STR_TO_DATE(:DAY, '%d/%m/%Y'));";
+            VALUES(0,:COMP_ID,STR_TO_DATE(:DAY, '%m/%d/%Y'));";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindValue(':COMP_ID', $compId,PDO::PARAM_INT);
         $stmt->bindValue(':DAY', $day,PDO::PARAM_STR);
@@ -348,12 +376,12 @@ class DatosDao {
         `MIDDLE_NAME`,`LAST_NAME`,`PASSPORT_NATIONALITY`,`BADGE_NAME`,`ADDRESS_1`,`ADDRESS_2`,
         `PASSPORT_NUMBER`,`PASSPORT_EXPIRY_DATE`,`POSTAL_CODE`,`CITY`,`COUNTRY`,`JOB_TITLE`,
         `JOB_TITLE_OTHER`,`ORGANISATION`,`EMAIL`,`DELEGATE_EMAIL`,`WORK_PHONE`,`MOBILE_PHONE`,
-        `PAYMENT_TYPE`,`TICKET_ID`,`REQUESTS_ID`,`SPECIAL_DIET_PHYSICAL`)
+        `PAYMENT_TYPE`,`TICKET_ID`,`REQUESTS_ID`,`SPECIAL_DIET_PHYSICAL`,`BODYGUARD`)
         VALUES(:ID ,:SOCIAL_ID ,:ARRIVAL_DETAILS_ID ,:GRANTING_PARTICIPANT ,:ATTEND ,:ATTEND_TYPE ,
             :CONTRIBUTE ,:CONTRIBUTE_TYPE ,:ACCOMPANYING ,:COMMITTEE_MEMBER ,:PREFIX ,:FIRST_NAME ,
             :MIDDLE_NAME ,:LAST_NAME ,:PASSPORT_NATIONALITY ,:BADGE_NAME ,:ADDRESS_1 ,:ADDRESS_2 ,:PASSPORT_NUMBER ,STR_TO_DATE(:PASSPORT_EXPIRY_DATE, '%Y-%m-%d') ,
             :POSTAL_CODE ,:CITY ,:COUNTRY ,:JOB_TITLE ,:JOB_TITLE_OTHER ,:ORGANISATION ,:EMAIL ,:DELEGATE_EMAIL ,
-            :WORK_PHONE ,:MOBILE_PHONE ,:PAYMENT_TYPE ,:TICKET_ID ,:REQUESTS_ID,:SPECIAL_DIET_PHYSICAL
+            :WORK_PHONE ,:MOBILE_PHONE ,:PAYMENT_TYPE ,:TICKET_ID ,:REQUESTS_ID,:SPECIAL_DIET_PHYSICAL,:BODYGUARD
         )";
     
         $stmt = $this->conn->prepare($sql);
@@ -392,6 +420,7 @@ class DatosDao {
         $stmt->bindValue(':TICKET_ID',$dato->ticketId,PDO::PARAM_INT);
         $stmt->bindValue(':REQUESTS_ID',$dato->requestId,PDO::PARAM_INT);
         $stmt->bindValue(':SPECIAL_DIET_PHYSICAL',$dato->specialDietaryPhysical,PDO::PARAM_STR);
+        $stmt->bindValue(':BODYGUARD',$dato->bodyguard,PDO::PARAM_INT);
         
         $result = $stmt->execute();
         $dato->id = $this->conn->lastInsertId();
@@ -399,7 +428,10 @@ class DatosDao {
         $this->saveInscription($dato);
         
         if($dato->accompanying == 1){
-            $this->saveAccompanyng($dato);
+            $this->saveAccompanyng($dato,0);
+        }
+        if($dato->bodyguard == 1){
+            $this->saveBodyguard($dato,1);
         }
             
     }

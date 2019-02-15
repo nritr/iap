@@ -18,10 +18,6 @@ $request			= new RequestUtil();
 
 
 
-
-
-
-
 echo $skin->getSkin();
 
 

@@ -16,7 +16,8 @@ $( document ).ready(function() {
 		pageLength: 25,
 		pagingType: "full_numbers",
 		lengthChange: true,
-		buttons: ['copy', 'excel', 'pdf']
+		buttons: ['copy', 'excel', 'pdf'],
+		 "ordering": false
 	});
 
 	table.buttons().container()

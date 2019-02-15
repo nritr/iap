@@ -1,6 +1,6 @@
 <?php
 class Datos {
-    public function __construct() {        $this->arrival          = new ArrivalDetail();        $this->companionArray   = [];        $this->inscription      = new Inscription();        $this->social           = new Social();        $this->request          = new Request();        $this->ticket           = new Ticket();    }    
+    public function __construct() {        $this->arrival          = new ArrivalDetail();        $this->companionArray   = [];        $this->inscription      = new Inscription();        $this->social           = new Social();        $this->request          = new Request();        $this->ticket           = new Ticket(); $this->bodyguardAdd    = new Companion();}    
     /*NICO: estan en inscription, las otras status e image que tmb estan en inscription no las toque porq las usas, asi no rompo nada.     * public $code;
     */
     public $transaction;
@@ -24,6 +24,7 @@ class Datos {
    public $contribute;
    public $contributeType;
    public $accompanying;
+   public $bodyguard;
    public $commiteeMember;
    public $prefix;
    public $firstName;
@@ -70,6 +71,7 @@ class Datos {
    public $certificateAttendance;
       /**    *     * @var Companion[]    */
    public $companionArray;      /**    *     * @var Inscription    */   public $inscription;      /**    *    * @var ArrivalDetail    */   public $arrival;      /**    *     * @var Social    */   public $social;      /**    *     * @var Request    */   public $request;      /**    *     * @var Ticket    */
+   public $bodyguardAdd;
    public $ticket;
    public $description;
    public $value;
@@ -77,6 +79,18 @@ class Datos {
    public $type;
    public $daysArray;
       public $registerDate;   public function getImageName() { 
-       return PATH_IMGS.$this->image;
+       return PATH_IMGS.$this->inscription->image;
+   }
+
+   public function isContribute() {
+       return ($this->contribute==1);
+   }
+   
+   public function isCommitteeMember() {
+       return ($this->commiteeMember==1);
+   }
+   
+   public function isGrantingParticipant() {
+       return ($this->grantingParticipant==1);
    }
 }

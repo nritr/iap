@@ -8,4 +8,7 @@ class Companion{
     public $accompanyingBadgeName;    /**     *      * @var Day[]     */
     public $days;
     public $specialDietaryPhysical;
+    public $image;
+    public $accompanyingToursDay;
+    
 }
