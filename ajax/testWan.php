@@ -59,11 +59,12 @@ $participant->transactionCode = $_GET["actioncode"];
 $msj = $datoService->getMailMessage($participant);
         $sendMail = new SendmailService();
 
-        $sendMail->sendMail($participant->email,"(VOUCHER) Confirmation of Registration for the 23rd Annual Conference and General Meeting of the IAP", $msj);
+        $sendMail->sendMail($participant->email,"(VOUCHER) Confirmation of Registration for the 24rd Annual Conference and General Meeting of the IAP", $msj);
+        
 //         $sendMail->sendMail("ignaciosc@gmail.com","(VOUCHER) Confirmation of Registration for the 23rd Annual Conference and General Meeting of the IAP", $msj);
 //         $sendMail->sendMail("nicolas.racciatti@gmail.com","(VOUCHER) Confirmation of Registration for the 23rd Annual Conference and General Meeting of the IAP", $msj);
         
-        $msj="Dear ".$participant->firstName." ".$participant->lastName."\\n\\rYou have been registered inside the system for the next IAP Conference.\\n\\rYou will receive an email with of the information. Remember that your order is waiting bank confirmation.";
+        $msj="Dear ".$participant->firstName." ".$participant->lastName." You have been registered inside the system for the next IAP Conference. You will receive an email with of the information. Remember that your order is waiting bank confirmation.";
         header('Location: ../landingPage.php?msj='.base64_encode($msj));
         
 ?>

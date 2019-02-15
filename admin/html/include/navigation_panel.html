@@ -28,31 +28,141 @@
 		<ul >
 			
 			<li class="" show-only-admin>
-				<a href="#" title="Administración"><i class="fa fa-lg fa-fw fa-gears"></i> <span class="menu-item-parent">Administration</span></a>
+				<a href="#" title="Administración"><i class="fa fa-lg fa-fw fa-gears"></i> <span class="menu-item-parent">Administración</span></a>
 				<ul >
-					<!-- li class="$TXT_GENERICO_ACTIVE$">
+					<li class="$TXT_GENERICO_ACTIVE$">
 						<a href="/admin/modulos/generico/php/main.php" title="Datos Paramétricos"><i class="fa fa-lg fa-fw  fa-check-square-o"></i> <span class="menu-item-parent">Datos Paramétricos</span></a>
-					</li> -->
+					</li>
 					<li class="$TXT_USUARIOS_ACTIVE$">
-						<a href="/admin/modulos/usuarios/php/usuarios.php" title="Usuarios"><i class="fa fa-lg fa-fw  fa-group"></i> <span class="menu-item-parent">Users</span></a>
+						<a href="/admin/modulos/usuarios/php/usuarios.php" title="Usuarios"><i class="fa fa-lg fa-fw  fa-group"></i> <span class="menu-item-parent">Usuarios</span></a>
 					</li>
 					
 				</ul> 
 			</li>
 			
 			<li class="" hidden-on-init show-admin show-ventas >
-				<a href="#" title="Ventas"><i class="fa fa-lg fa-fw fa-group"></i> <span class="menu-item-parent">Registrations</span></a>
+				<a href="#" title="Ventas"><i class="fa fa-lg fa-fw fa-money"></i> <span class="menu-item-parent">Ventas</span></a>
 				<ul >
-					<li class="$TXT_PARTICIPANTS_MAIN_ACTIVE$">
-						<a href="/admin/modulos/participantes/php/participantes_main.php" title="Dashboard"><i class="fa fa-lg fa-fw fa-group"></i> <span class="menu-item-parent">Participants</span></a>
+					<li class="$TXT_VENTAS_MAIN_ACTIVE$">
+						<a href="/admin/modulos/ventas/php/ventas_main.php" title="Dashboard"><i class="fa fa-lg fa-fw fa-dashboard"></i> <span class="menu-item-parent">Dashboard</span></a>
 					</li>
-
+					<li class="$TXT_BUSCAR_CLI_ACTIVE$">
+						<a href="/admin/modulos/clientes/php/clientes_main.php" title="Buscar Cliente"><i class="fa fa-lg fa-fw fa-search"></i> <span class="menu-item-parent">Buscar Cliente</span></a>
+					</li>
+					
 				</ul> 
 			</li>
 
+			<li class="" hidden-on-init show-admin show-atencion-cli >
+				<a href="#" title="Atención Clientes"><i class="fa fa-lg fa-fw fa-group"></i> <span class="menu-item-parent">Atención Cli.</span></a>
+				<ul >
+					<li class="$TXT_PROSP_RENOV_ACTIVE$">
+						<a href="/admin/modulos/prospectos/php/prospect_main.php" title="Prospectos de Renovación"><i class="fa fa-lg fa-fw fa-rotate-right"></i> <span class="menu-item-parent">Prospect. Renovación</span></a>
+					</li>
+					<li class="$TXT_BUSCAR_CLI_ACTIVE$">
+						<a href="/admin/modulos/clientes/php/clientes_main.php" title="Buscar Cliente"><i class="fa fa-lg fa-fw fa-search"></i> <span class="menu-item-parent">Buscar Cliente</span></a>
+					</li>
+					<li class="$TXT_NUEVO_PROSPECT_ACTIVE$">
+						<a href="/admin/modulos/prospectos/php/prospect_new.php" title="Buscar Cliente"><i class="fa fa-lg fa-fw fa-comments-o"></i> <span class="menu-item-parent">Nuevo Prospecto</span></a>
+					</li>
+				</ul> 
+			</li>
+			<li class="$TXT_CHAT_ACTIVE$" >
+				<a href="/admin/modulos/chat/php/chat_main.php" title="Chat Whatsapp" target="test" ><i class="fa fa-lg fa-fw fa-comments-o"></i> <span class="menu-item-parent">Chat</span></a>
+			</li>
 		</ul>
 		
 		
+			
+		<!-- 
+		<ul style="display:none">
+			<li class="$TXT_FACTURA_ACTIVE$">
+				<a href="#" title="Dashboard"><i class="fa fa-lg fa-fw fa-dollar"></i> <span class="menu-item-parent">Ventas</span></a>
+				<ul >
+					<li class="$TXT_FACTURAR_ACTIVE$">
+						<a href="/admin/modulos/facturas/php/facturar_main.php" title="Dashboard"><i class="fa fa-lg fa-fw fa-copy"></i> <span class="menu-item-parent">Factura B</span></a>
+					</li>
+					<li class="$TXT_FACTURARA_ACTIVE$">
+						<a href="/admin/modulos/facturas/php/facturaa_main.php" title="Dashboard"><i class="fa fa-lg fa-fw fa-copy"></i> <span class="menu-item-parent">Factura A</span></a>
+					</li>
+					<li class="$TXT_PRESUPUESTO_ACTIVE$">
+						<a href="/admin/modulos/facturas/php/presupuesto_main.php" title="Dashboard"><i class="fa fa-lg fa-fw fa-copy"></i> <span class="menu-item-parent">Presupuesto</span></a>
+					</li>
+					<li class="$TXT_PRESUPUESTOR_ACTIVE$">
+						<a href="/admin/modulos/facturas/php/presupuestor_main.php" title="Dashboard"><i class="fa fa-lg fa-fw fa-copy"></i> <span class="menu-item-parent">Presupuesto R.</span></a>
+					</li>
+					<li class="$TXT_VERFACTURAS_ACTIVE$">
+						<a href="/admin/modulos/facturas/php/verfacturas_main.php" title="Dashboard"><i class="fa fa-lg fa-fw fa-search"></i> <span class="menu-item-parent">Buscar Facturas</span></a>
+					</li>
+					<li class="$TXT_CLIENTE_ACTIVE$">
+						<a href="/admin/modulos/clientes/php/clientes.php" title="Dashboard"><i class="fa fa-lg fa-fw fa-book"></i> <span class="menu-item-parent">Clientes</span></a>
+					</li>
+				</ul> 
+			</li>
+			
+			<li class="">
+				<a href="#"><i class="fa fa-lg fa-fw fa-book txt-color-blue"></i> <span class="menu-item-parent">Contabilidad</span></a>
+				<ul>
+					<li class="$TXT_LIBRODIARIO_ACTIVE$">
+						<a href="/admin/modulos/contabilidad/php/main_librodiario.php" title="Dashboard"><i class="fa fa-lg fa-fw fa-exchange"></i> <span class="menu-item-parent">Libro Diario</span></a>
+					</li>
+					<li class="$TXT_GASTOSINGRESOS_ACTIVE$">
+						<a href="/admin/modulos/contabilidad/php/main_gi.php" title="Dashboard"><i class="fa fa-lg fa-fw fa-money"></i> <span class="menu-item-parent">Gaston/Ingresos</span></a>
+					</li>
+					<li class="$TXT_TIPOGASTOS_ACTIVE$">
+						<a href="/admin/modulos/contabilidad/php/main_tg.php" title="Dashboard"><i class="fa fa-lg fa-fw  fa-tags"></i> <span class="menu-item-parent">Tipo Gastos</span></a>
+					</li>
+					<li class="$TXT_SUBTIPOGASTOS_ACTIVE$">
+						<a href="/admin/modulos/contabilidad/php/main_stg.php" title="Dashboard"><i class="fa fa-lg fa-fw  fa-tags"></i> <span class="menu-item-parent">Sub Tipo Gastos</span></a>
+					</li>
+				</ul>
+			</li>
+			
+			<li class="">
+				<a href="#"><i class="fa fa-lg fa-fw fa-truck txt-color-blue"></i> <span class="menu-item-parent">Compras</span></a>
+				<ul>
+					
+					<li class="$TXT_PROVEEDOR_ACTIVE$">
+						<a href="/admin/modulos/proveedores/php/proveedores.php" title="Dashboard"><i class="fa fa-lg fa-fw fa-cubes"></i> <span class="menu-item-parent">Proveedores</span></a>
+					</li>
+					<li class="$TXT_OC_ACTIVE$">
+						<a href="/admin/modulos/proveedores/php/ocompras_main.php" title="Dashboard"><i class="fa fa-lg fa-fw fa-copy"></i> <span class="menu-item-parent">Nueva OC</span></a>
+					</li>
+					<li class="$TXT_OCLIST_ACTIVE$">
+						<a href="/admin/modulos/proveedores/php/veroc_main.php" title="Dashboard"><i class="fa fa-lg fa-fw fa-search"></i> <span class="menu-item-parent">Buscar OC</span></a>
+					</li>
+				</ul>
+			</li>
+			
+			<li class="">
+				<a href="#"><i class="fa fa-lg fa-fw fa-cubes txt-color-blue"></i> <span class="menu-item-parent">Stock</span></a>
+				<ul>
+					<li class="$TXT_RUBROS_ACTIVE$">
+						<a href="/admin/modulos/stock/php/rubros.php" title="Dashboard"><i class="fa fa-lg fa-fw fa-tags"></i> <span class="menu-item-parent">Rubros</span></a>
+					</li>
+					<li class="$TXT_ARTICULOS_ACTIVE$">
+						<a href="/admin/modulos/stock/php/articulos.php" title="Dashboard"><i class="fa fa-lg fa-fw fa-archive"></i> <span class="menu-item-parent">Artículos</span></a>
+					</li>
+					
+				</ul>
+			</li>
+			<li class="">
+				<a href="#" title="Dashboard"><i class="fa fa-lg fa-fw fa-gears"></i> <span class="menu-item-parent">Administración</span></a>
+				<ul >
+					<li class="$TXT_GENERICO_ACTIVE$">
+						<a href="/admin/modulos/generico/php/main.php" title="Dashboard"><i class="fa fa-lg fa-fw  fa-check-square-o"></i> <span class="menu-item-parent">Datos</span></a>
+					</li>
+					
+					<li class="$TXT_AFIP_ACTIVE$">
+						<a href="/admin/modulos/afip/php/afip_main.php" title="Dashboard"><i class="fa fa-lg fa-fw fa-file-o"></i> <span class="menu-item-parent">Datos de Facturación</span></a>
+					</li>
+					<li class="$TXT_USUARIOS_ACTIVE$">
+						<a href="/admin/modulos/usuarios/php/usuarios.php" title="Dashboard"><i class="fa fa-lg fa-fw  fa-group"></i> <span class="menu-item-parent">Usuarios</span></a>
+					</li>
+					
+				</ul> 
+			</li>
+		</ul>-->
 	</nav>
 	
 

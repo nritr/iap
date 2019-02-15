@@ -50,12 +50,14 @@ function attachElements() {
 		}
 	})
 	$("#DATOS-COUNTRY").val($("#country").val());
-
+	$("#DATOS-JOBTITLE").val($("#job_title").val());
+	$("#DATOS-CONTRIBUTE-TYPE").val($("#contribute-type").val());
+	
 	if ($.fn.datepicker) {
 		$('.datepicker').each(function() {
 
 			var $this = $(this),
-				dataDateFormat = $this.attr('data-dateformat') || 'dd.mm.yy';
+				dataDateFormat = $this.attr('data-dateformat') || 'mm.dd.yy';
 
 			$this.datepicker({
 				dateFormat : dataDateFormat,

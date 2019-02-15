@@ -9,5 +9,5 @@ class Social{
     public $accompanyingConferenceDinner;
     public $farewellParty;
     public $accompanyingFarewellParty;
-    public $networkingNigth;
+    public $networkingNight;
 }

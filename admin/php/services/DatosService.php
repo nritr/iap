@@ -39,13 +39,13 @@ class DatosService {
 	    
 	    //$datoService->updateInscription($participant);
 	    $msj = "<div style='font-family:Roboto,RobotoDraft,Helvetica,Arial,sans-serif;'>";
-	    $msj = $msj ."<center><img src=\"https://s3-sa-east-1.amazonaws.com/tv.zencast.iap.content/iap_2018.png\" /></center>";
+	    $msj = $msj ."<center><img src=\"https://iap.follow-develop.com.ar/web/iap_2018.png\" /></center>";
 	    $msj = $msj. "<br/><br/>";
 	    
 	    $msj = $msj. "<br/><br/>";
 	    $msj = $msj. "<center>";
-	    $msj = $msj. "<p>The 23rd Annual Conference and General Meeting of the IAP</p>";
-	    $msj = $msj. "<p>9 - 13 September 2018 in Johannesburg, South Africa</p>";
+	    $msj = $msj. "<p>The 24rd Annual Conference and General Meeting of the IAP</p>";
+	    $msj = $msj. "<p>15 - 19 September 2019 in Buenos Aires, Argentina</p>";
 	    $msj = $msj. "</center>";
 	    
 	    
@@ -159,9 +159,9 @@ class DatosService {
 	        $msj = $msj. "<b>Social events:</b>";
 	        $msj = $msj. "<br/><br/>";
 	        $msj = $msj. "You have registered for the following events:";
-	        $msj = $msj. "<li><b>President's Welcome Reception (Sunday 9 September 2018)</b></li>";
+	        $msj = $msj. "<li><b>President's Welcome Reception (Sunday 15 September 2019)</b></li>";
 	        
-	        if (($participant->accompanyingPresident!= null && $participant->accompanyingPresident == 1)) {
+	        if (($participant->accompanyngPresident!= null && $participant->accompanyngPresident == 1)) {
 	            $msj = $msj. "<br>";
 	            $msj = $msj. "<ul style=\"list-style-type:circle\">";
 	            $msj = $msj. "<li>Accompanying Person:&nbsp;<b>(+1)</b></li>";
@@ -174,7 +174,7 @@ class DatosService {
 	    if (($participant->conferenceDinner != null && $participant->conferenceDinner == 1)) {
 	        
 	        
-	        $msj = $msj. "<li><b>Conference Dinner (Monday 10 September 2018)</b></li>";
+	        $msj = $msj. "<li><b>Conference Dinner (Monday 16 September 2019)</b></li>";
 	        
 	        if (($participant->accompanyingConferenceDinner != null && $participant->accompanyingConferenceDinner == 1)) {
 	            $msj = $msj. "<br>";
@@ -187,7 +187,7 @@ class DatosService {
 	    
 	    if (($participant->networkingNight != null  && $participant->networkingNight == 1)) {
 	        
-	        $msj = $msj. "<li><b>Professional Networking Event Only Conference Participants are entitled to attend the Professional Networking Night. (Tuesday 11 September 2018)</b></li>";
+	        $msj = $msj. "<li><b>Professional Networking Event Only Conference Participants are entitled to attend the Professional Networking Night. (Tuesday 17 September 2019)</b></li>";
 	        $msj = $msj. "<br/>";
 	    }
 	    
@@ -216,10 +216,10 @@ class DatosService {
 	            
 	            foreach ($participant->companionArray[0]->days as $days) {
 	                
-	                if ($days->day == "09/10/2018") {
-	                    $msj = $msj. "<li><b>Accompanying Persons Half Day Tour (Monday 10 September 2018)</b></li>";
+	                if ($days->day == "09/16/2019") {
+	                    $msj = $msj. "<li><b>Accompanying Persons Half Day Tour (Monday 16 September 2019)</b></li>";
 	                } else {
-	                    $msj = $msj. "<li><b>Accompanying Persons Full Day Tour (Wednesday 12 September 2018)</b></li>";
+	                    $msj = $msj. "<li><b>Accompanying Persons Full Day Tour (Wednesday 18 September 2019)</b></li>";
 	                }
 	            }
 	            
@@ -255,14 +255,14 @@ class DatosService {
 	    $msj = $msj. "<br/>";
 	    $msj = $msj. "<p><b>Please note:&nbsp;</b>All cancellations must be made in writing to the Conference Secretary and any refund will be made after the Conference.</p>";
 	    $msj = $msj. "<br/>";
-	    $msj = $msj. "<p>The onsite registration of Participants and distribution of conference material and identification badges will be conducted in Stanton Conference Centre) on Sunday 9 September from 10:00 - 18:00. Please bring this voucher to ensure a smooth and quick registration process.</p>";
-	    $msj = $msj. "<p>We look forward welcoming you in  Johannesburg, South Africa in September 2018.</p>";
+	    $msj = $msj. "<p>The onsite registration of Participants and distribution of conference material and identification badges will be conducted in Stanton Conference Centre) on Sunday 15 September from 10:00 - 18:00. Please bring this voucher to ensure a smooth and quick registration process.</p>";
+	    $msj = $msj. "<p>We look forward welcoming you in  Buenos Aires, Argentina in September 2019.</p>";
 	    $msj = $msj. "<br/>";
 	    $msj = $msj. "<p>Best regards</p>";
 	    $msj = $msj. "<p>IAP 2017 Conference Secretariat</p>";
 	    $msj = $msj. "<p>Iap-sa2018@npa.gov.za</p>";
 	    $msj = $msj. "</div>";
-	    echo $msj;
+	    return $msj;
 	    
 	    
 	}

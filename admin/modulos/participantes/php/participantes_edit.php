@@ -36,8 +36,8 @@ if ($obj) {
 	$skin->addVariable("TXT_CODE"                          , $obj->inscription->code);
 	$skin->addVariable("TXT_ID_DATOS"                      , $obj->id);
 	$skin->addVariable("TXT_TOTAL"                         , $obj->ticket->total);
-	$skin->addVariable("TXT_SELECTED_TICKET_DAY"           , strpos($obj->ticket->description, "Day")===true ? "selected" : "");
-	$skin->addVariable("TXT_SELECTED_TICKET_FULL"          , strpos($obj->ticket->description, "Full")===true ? "selected" : "");
+	$skin->addVariable("TXT_SELECTED_TICKET_DAY"           , strpos(" ".$obj->ticket->description, "Day")>0 ? "selected" : "");
+	$skin->addVariable("TXT_SELECTED_TICKET_FULL"          , strpos(" ".$obj->ticket->description, "Early")>0 ? "selected" : "");
 	$skin->addVariable("TXT_FECHAS_TICKETS"                , getDaysParticipantString($obj->ticket));
 	$skin->addVariable("TXT_PREVIX"                        , $obj->prefix);
 	$skin->addVariable("TXT_PASSPORT_EXPIRATION_DATE"      , $obj->passportExpiryDate);
@@ -53,8 +53,26 @@ if ($obj) {
 	$skin->addVariable("TXT_VAL_COUNTRY"                   , $obj->country);
 	$skin->addVariable("TXT_COUNTRIES"                     , getCountries());
 	$skin->addVariable("TXT_PASSPORT_NUMBER"               , $obj->passportNumber);
-	//TODO: falta el campo en la base y la propiedad
-	//$skin->addVariable("TXT_DIETARY"                       , $obj->sp);
+    $skin->addVariable("TXT_DIETARY"                       , $obj->specialDietaryPhysical);
+    $skin->addVariable("TXT_JOBTITLES"                     , getJobTitles());
+    $skin->addVariable("TXT_VAL_JOB_TITLE"                 , $obj->jobTitle);
+    $skin->addVariable("TXT_DELEGATE_EMAIL"                , $obj->delegateEmail);
+    $skin->addVariable("TXT_ORGANIZATION"                  , $obj->organisation);
+    $skin->addVariable("TXT_WORKPHONE"                     , $obj->workPone);
+    $skin->addVariable("TXT_EMAIL"                         , $obj->email);
+    $skin->addVariable("TXT_MOBILEPHONE"                   , $obj->mobilePhone);
+    $skin->addVariable("TXT_PICTURE"                       , $obj->getImageName());
+    $skin->addVariable("DB_PICTURE"                        , $obj->inscription->image);
+    $skin->addVariable("TXT_CONTRIBUTE_YES"                , $obj->isContribute() ? "checked" : "");
+    $skin->addVariable("TXT_CONTRIBUTE_NO"                 , !$obj->isContribute() ? "checked" : "");
+    $skin->addVariable("TXT_COMMITTEE_MEMBER_YES"          , $obj->isCommitteeMember() ? "checked" : "");
+    $skin->addVariable("TXT_COMMITTEE_MEMBER_NO"           , !$obj->isCommitteeMember() ? "checked" : "");
+    $skin->addVariable("TXT_CONTRIBUTE_TYPE"               , $obj->contributeType);
+    $skin->addVariable("TXT_CONTRIBUTORS_TYPE"             , getContributorType());
+    
+    $skin->addVariable("TXT_GRANTING_PARTICIPANT_YES"      , $obj->isGrantingParticipant() ? "checked" : "");
+    $skin->addVariable("TXT_GRANTING_PARTICIPANT_NO"       , !$obj->isGrantingParticipant() ? "checked" : "");
+    
 }
 /*
 
@@ -93,6 +111,10 @@ function getCountries() {
 }
 function getJobTitles() {
     $skin 			= new SkinManager("/admin/modulos/participantes/html/jobtitle.html");
+    return $skin->getSkin();
+}
+function getContributorType() {
+    $skin 			= new SkinManager("/admin/modulos/participantes/html/contributorType.html");
     return $skin->getSkin();
 }
 ?>

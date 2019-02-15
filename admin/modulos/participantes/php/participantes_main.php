@@ -35,8 +35,9 @@ $skin->addVariable("TXT_VALUE"                      , $value);
 $skin->addVariable("TXT_COUNTRIES"                  , getCountries());
 $skin->addVariable("TXT_JOB_TITLE"                  , getJobTitles());
 
-$filter2                 = new DatoFilter();
+$filter2                = new DatoFilter();
 $filter2->setDynamicFilter($filter, $value);
+$filter2->existsTicket  = 1;
 $list = $datosServices->load($filter2);
 $loop = new SkinLoop('LOOP_PARTICIPANTS');
 foreach ($list as $value) {
